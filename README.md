@@ -21,6 +21,11 @@ are drafted and published with the `/new-post` Claude Code skill.
 - [docs/tech-spec.md](docs/tech-spec.md) — how it is built, served and published
 - [deploy/README.md](deploy/README.md) — deploy and nginx runbook
 
+## License
+
+Code: [MIT](LICENSE). Articles, images and the SciScend brand assets: all rights
+reserved — see [LICENSE-CONTENT.md](LICENSE-CONTENT.md).
+
 ---
 
 Built with Claude Opus 5.5 via Claude Code. Published by [SciScend](https://sciscend.com/).
