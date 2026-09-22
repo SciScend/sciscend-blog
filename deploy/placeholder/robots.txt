@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sciscend.com/blog/sitemap-index.xml

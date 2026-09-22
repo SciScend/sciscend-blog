@@ -1,0 +1,68 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, url } from '../site.config.ts';
+import { getPosts, formatDate, readingMinutes, type Post } from '../lib/posts.ts';
+import { postSchema } from '../lib/schema.ts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: Post;
+}
+const { post } = Astro.props;
+const d = post.data;
+const { Content } = await render(post);
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const minutes = readingMinutes(post.body);
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.description}
+  image={d.heroImage}
+  type="article"
+  publishedTime={d.pubDate}
+  modifiedTime={d.updatedDate}
+  tags={d.tags}
+  jsonLd={postSchema(post, canonical)}
+  noindex={d.draft}
+>
+  <article lang={d.lang}>
+    <header class="post-head">
+      <h1>{d.title}</h1>
+      <p class="lede">{d.description}</p>
+      <div class="meta" lang="bg">
+        <time datetime={d.pubDate.toISOString()}>{formatDate(d.pubDate)}</time>
+        {d.updatedDate && <span>обновена {formatDate(d.updatedDate)}</span>}
+        <span>{minutes} мин. четене</span>
+        {d.draft && <span class="draft-badge">чернова</span>}
+      </div>
+      {
+        d.tags.length > 0 && (
+          <ul class="tags" lang="bg">
+            {d.tags.map((t) => (
+              <li>
+                <a class="tag" href={url(`tag/${t}`)}>{t}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <aside class="author-box" lang="bg">
+    <strong>{SITE.author.name}</strong>
+    <p>{SITE.author.bio}</p>
+  </aside>
+
+  <p class="back"><a href={url()}>← Всички статии</a></p>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { url } from '../../site.config.ts';
+import { getPosts, tagCounts, type Post } from '../../lib/posts.ts';
+
+// One page per tag in use — generated from the posts, never from a fixed list.
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return tagCounts(posts).map(({ tag }) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((p) => p.data.tags.includes(tag)) },
+  }));
+}
+
+interface Props {
+  tag: string;
+  posts: Post[];
+}
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`Категория: ${tag}`} description={`Статии в блога на SciScend на тема ${tag}.`}>
+  <header class="page-head">
+    <h1>{tag}</h1>
+    <p>{posts.length} {posts.length === 1 ? 'статия' : 'статии'} · <a href={url('tag')}>всички категории</a></p>
+  </header>
+
+  <PostList posts={posts} />
+</BaseLayout>

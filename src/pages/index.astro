@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { SITE } from '../site.config.ts';
+import { getPosts } from '../lib/posts.ts';
+import { blogSchema } from '../lib/schema.ts';
+
+const posts = await getPosts();
+---
+
+<BaseLayout jsonLd={blogSchema()}>
+  <header class="page-head">
+    <h1>{SITE.title}</h1>
+    <p>{SITE.description}</p>
+  </header>
+
+  {posts.length > 0 ? <PostList posts={posts} /> : <p class="empty">Първите статии идват скоро.</p>}
+</BaseLayout>

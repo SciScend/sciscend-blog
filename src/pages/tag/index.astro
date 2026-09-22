@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { url } from '../../site.config.ts';
+import { getPosts, tagCounts } from '../../lib/posts.ts';
+
+// Categories are not predefined: this page lists whatever tags the posts use.
+const tags = tagCounts(await getPosts());
+---
+
+<BaseLayout title="Категории" description="Всички теми в блога на SciScend.">
+  <header class="page-head">
+    <h1>Категории</h1>
+    <p>Темите, за които съм писала досега.</p>
+  </header>
+
+  {
+    tags.length > 0 ? (
+      <ul class="tags tag-cloud">
+        {tags.map(({ tag, count }) => (
+          <li>
+            <a class="tag" href={url(`tag/${tag}`)}>
+              {tag}
+              <span class="count">{count}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">Още няма категории.</p>
+    )
+  }
+</BaseLayout>

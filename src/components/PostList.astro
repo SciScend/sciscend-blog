@@ -1,0 +1,36 @@
+---
+import { url } from '../site.config.ts';
+import { formatDate, type Post } from '../lib/posts.ts';
+
+interface Props {
+  posts: Post[];
+}
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => (
+      <li lang={post.data.lang}>
+        <div class="meta">
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          {post.data.lang === 'en' && <span> · English</span>}
+          {post.data.draft && <span class="draft-badge">чернова</span>}
+        </div>
+        <h2>
+          <a href={url(post.id)}>{post.data.title}</a>
+        </h2>
+        <p>{post.data.description}</p>
+        {post.data.tags.length > 0 && (
+          <ul class="tags">
+            {post.data.tags.map((t) => (
+              <li>
+                <a class="tag" href={url(`tag/${t}`)}>{t}</a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ul>
