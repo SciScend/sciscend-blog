@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 318" width="760" height="318" role="img" aria-label="Laya срещу Jev върху 50 поста на български: 36/50 срещу 48/50">
+<title>Laya срещу Jev върху 50 поста на български: 36/50 срещу 48/50</title>
+<style>
+  text { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif; fill: #353535; }
+  .soft { fill: #5c5f63; } .faint { fill: #7a7e83; }
+  .mono { font-family: ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace; }
+  .panel { fill: #f4f7f8; stroke: #e3e8ea; }
+  .card { fill: #ffffff; stroke: #d5dcdf; }
+  .line { stroke: #9aa0a5; fill: none; }
+  .ah { fill: #9aa0a5; }
+  .grid { stroke: #e3e8ea; }
+  .track { fill: #e3e8ea; }
+  .jev { fill: #0b6f68; } .jevTint { fill: #e3f6f4; stroke: #13b0a5; } .jevInk { fill: #0b6f68; }
+  .llm { fill: #0050a7; } .llmTint { fill: #e6eef8; stroke: #5b8fd0; } .llmInk { fill: #0050a7; }
+  .hum { fill: #b86a00; } .humTint { fill: #fbf0e0; stroke: #d99a3e; } .humInk { fill: #8a4f00; }
+  .mid { fill: #c9ced2; } .midTint { fill: #eef1f3; stroke: #b7bec3; }
+  .bar2 { fill: #b8bdc1; }
+  .onDark { fill: #ffffff; }
+  @media (prefers-color-scheme: dark) {
+    text { fill: #e7e9ea; }
+    .soft { fill: #b3b8bc; } .faint { fill: #8b9196; }
+    .panel { fill: #1b1f22; stroke: #2a3034; }
+    .card { fill: #131618; stroke: #353c41; }
+    .line { stroke: #6d7479; } .ah { fill: #6d7479; }
+    .grid { stroke: #2a3034; } .track { fill: #2a3034; }
+    .jev { fill: #2cc9bd; } .jevTint { fill: #15302e; stroke: #2cc9bd; } .jevInk { fill: #7fe3da; }
+    .llm { fill: #6fb0ff; } .llmTint { fill: #16253a; stroke: #4d7fbf; } .llmInk { fill: #9cc8ff; }
+    .hum { fill: #f0b050; } .humTint { fill: #35270f; stroke: #b8862e; } .humInk { fill: #f5c77a; }
+    .mid { fill: #4a5156; } .midTint { fill: #22272b; stroke: #454c51; }
+    .bar2 { fill: #5c6166; }
+    .onDark { fill: #131618; }
+  }
+</style>
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" class="ah"/>
+  </marker>
+</defs>
+
+<rect x="230" y="14" width="12" height="12" rx="3" class="jev"/>
+<text x="248" y="25" font-size="12" font-weight="400" text-anchor="start" class="soft">Jev (API)</text>
+<rect x="340" y="14" width="12" height="12" rx="3" class="bar2"/>
+<text x="358" y="25" font-size="12" font-weight="400" text-anchor="start" class="soft">Laya multilingual (локално)</text>
+<line x1="230.0" y1="40" x2="230.0" y2="262" class="grid" stroke-width="1"/>
+<text x="230.0" y="280" font-size="11" font-weight="400" text-anchor="middle" class="faint">0%</text>
+<line x1="332.5" y1="40" x2="332.5" y2="262" class="grid" stroke-width="1"/>
+<text x="332.5" y="280" font-size="11" font-weight="400" text-anchor="middle" class="faint">25%</text>
+<line x1="435.0" y1="40" x2="435.0" y2="262" class="grid" stroke-width="1"/>
+<text x="435.0" y="280" font-size="11" font-weight="400" text-anchor="middle" class="faint">50%</text>
+<line x1="537.5" y1="40" x2="537.5" y2="262" class="grid" stroke-width="1"/>
+<text x="537.5" y="280" font-size="11" font-weight="400" text-anchor="middle" class="faint">75%</text>
+<line x1="640.0" y1="40" x2="640.0" y2="262" class="grid" stroke-width="1"/>
+<text x="640.0" y="280" font-size="11" font-weight="400" text-anchor="middle" class="faint">100%</text>
+<text x="20" y="72" font-size="14" font-weight="700" text-anchor="start">всички</text>
+<text x="20" y="90" font-size="11" font-weight="400" text-anchor="start" class="faint">50 поста</text>
+<path d="M230,54 H620 Q624,54 624,58 V74 Q624,78 620,78 H230 Z" class="jev"/>
+<text x="631.6" y="71" font-size="13" font-weight="700" text-anchor="start">48/50</text>
+<path d="M230,82 H521 Q525,82 525,86 V102 Q525,106 521,106 H230 Z" class="bar2"/>
+<text x="533.2" y="99" font-size="13" font-weight="400" text-anchor="start">36/50</text>
+<text x="20" y="144" font-size="14" font-weight="400" text-anchor="start">съществуваща категория</text>
+<text x="20" y="162" font-size="11" font-weight="400" text-anchor="start" class="faint">28 поста</text>
+<path d="M230,126 H636 Q640,126 640,130 V146 Q640,150 636,150 H230 Z" class="jev"/>
+<text x="648.0" y="143" font-size="13" font-weight="700" text-anchor="start">28/28</text>
+<path d="M230,154 H577 Q581,154 581,158 V174 Q581,178 577,178 H230 Z" class="bar2"/>
+<text x="589.4285714285713" y="171" font-size="13" font-weight="400" text-anchor="start">24/28</text>
+<text x="20" y="216" font-size="14" font-weight="400" text-anchor="start">нова тема</text>
+<text x="20" y="234" font-size="11" font-weight="400" text-anchor="start" class="faint">22 поста</text>
+<path d="M230,198 H599 Q603,198 603,202 V218 Q603,222 599,222 H230 Z" class="jev"/>
+<text x="610.7272727272727" y="215" font-size="13" font-weight="700" text-anchor="start">20/22</text>
+<path d="M230,226 H450 Q454,226 454,230 V246 Q454,250 450,250 H230 Z" class="bar2"/>
+<text x="461.6363636363636" y="243" font-size="13" font-weight="400" text-anchor="start">12/22</text>
+<text x="20" y="306" font-size="11" font-weight="400" text-anchor="start" class="faint">Вярно предложение при 4 начални категории | при нова тема се мери само 'друга тема', не името</text>
+</svg>

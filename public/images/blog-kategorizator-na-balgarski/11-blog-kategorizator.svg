@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 344" width="760" height="344" role="img" aria-label="Категоризатор на блог постове: Laya или Jev избира, BgGPT измисля име, човекът решава">
+<title>Категоризатор на блог постове: Laya или Jev избира, BgGPT измисля име, човекът решава</title>
+<style>
+  text { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif; fill: #353535; }
+  .soft { fill: #5c5f63; } .faint { fill: #7a7e83; }
+  .mono { font-family: ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace; }
+  .panel { fill: #f4f7f8; stroke: #e3e8ea; }
+  .card { fill: #ffffff; stroke: #d5dcdf; }
+  .line { stroke: #9aa0a5; fill: none; }
+  .ah { fill: #9aa0a5; }
+  .grid { stroke: #e3e8ea; }
+  .track { fill: #e3e8ea; }
+  .jev { fill: #0b6f68; } .jevTint { fill: #e3f6f4; stroke: #13b0a5; } .jevInk { fill: #0b6f68; }
+  .llm { fill: #0050a7; } .llmTint { fill: #e6eef8; stroke: #5b8fd0; } .llmInk { fill: #0050a7; }
+  .hum { fill: #b86a00; } .humTint { fill: #fbf0e0; stroke: #d99a3e; } .humInk { fill: #8a4f00; }
+  .mid { fill: #c9ced2; } .midTint { fill: #eef1f3; stroke: #b7bec3; }
+  .bar2 { fill: #b8bdc1; }
+  .onDark { fill: #ffffff; }
+  @media (prefers-color-scheme: dark) {
+    text { fill: #e7e9ea; }
+    .soft { fill: #b3b8bc; } .faint { fill: #8b9196; }
+    .panel { fill: #1b1f22; stroke: #2a3034; }
+    .card { fill: #131618; stroke: #353c41; }
+    .line { stroke: #6d7479; } .ah { fill: #6d7479; }
+    .grid { stroke: #2a3034; } .track { fill: #2a3034; }
+    .jev { fill: #2cc9bd; } .jevTint { fill: #15302e; stroke: #2cc9bd; } .jevInk { fill: #7fe3da; }
+    .llm { fill: #6fb0ff; } .llmTint { fill: #16253a; stroke: #4d7fbf; } .llmInk { fill: #9cc8ff; }
+    .hum { fill: #f0b050; } .humTint { fill: #35270f; stroke: #b8862e; } .humInk { fill: #f5c77a; }
+    .mid { fill: #4a5156; } .midTint { fill: #22272b; stroke: #454c51; }
+    .bar2 { fill: #5c6166; }
+    .onDark { fill: #131618; }
+  }
+</style>
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" class="ah"/>
+  </marker>
+</defs>
+
+<rect x="20" y="40" width="130" height="76" rx="10" class="card"/>
+<text x="85" y="70" font-size="14" font-weight="700" text-anchor="middle">нов пост</text>
+<text x="85" y="90" font-size="11" font-weight="400" text-anchor="middle" class="soft">заглавие + текст</text>
+<line x1="152" y1="78" x2="180" y2="78" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="184" y="20" width="250" height="136" rx="12" class="jev"/>
+<text x="200" y="46" font-size="15" font-weight="700" text-anchor="start" class="onDark">1 | Laya или Jev</text>
+<text x="200" y="66" font-size="12" font-weight="400" text-anchor="start" class="onDark">Choice | Laya на CPU ~0,2 s | Jev ~0,4 s</text>
+<rect x="200" y="80" width="91" height="20" rx="10" class="card"/>
+<text x="245.5" y="94" font-size="11" font-weight="400" text-anchor="middle" class="soft">Програмиране</text>
+<rect x="296" y="80" width="72" height="20" rx="10" class="card"/>
+<text x="332.0" y="94" font-size="11" font-weight="400" text-anchor="middle" class="soft">Пътувания</text>
+<rect x="200" y="104" width="59" height="20" rx="10" class="card"/>
+<text x="229.5" y="118" font-size="11" font-weight="400" text-anchor="middle" class="soft">Готвене</text>
+<rect x="264" y="104" width="97" height="20" rx="10" class="card"/>
+<text x="312.5" y="118" font-size="11" font-weight="400" text-anchor="middle" class="soft">Лични финанси</text>
+<rect x="200" y="128" width="78" height="20" rx="10" class="card"/>
+<text x="239.0" y="142" font-size="11" font-weight="400" text-anchor="middle" class="soft">друга тема</text>
+<path d="M436,60 C470,60 470,50 494,50" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M436,110 C470,110 470,200 494,200" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="498" y="20" width="240" height="68" rx="10" class="jevTint"/>
+<text x="514" y="44" font-size="12" font-weight="400" text-anchor="start" class="soft">съществуваща категория</text>
+<text x="514" y="66" font-size="12" font-weight="700" text-anchor="start" class="jevInk">предложение + втора възможност</text>
+<rect x="498" y="158" width="240" height="90" rx="10" class="llmTint"/>
+<text x="514" y="182" font-size="12" font-weight="400" text-anchor="start" class="soft">'друга тема'</text>
+<text x="514" y="204" font-size="14" font-weight="700" text-anchor="start" class="llmInk">2 | BgGPT 3.0 4B (Ollama)</text>
+<text x="514" y="224" font-size="12" font-weight="400" text-anchor="start" class="soft">име на български + описание</text>
+<text x="514" y="240" font-size="12" font-weight="400" text-anchor="start" class="soft">на английски, ~6 s</text>
+<path d="M510,90 C490,180 460,230 420,268" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M600,250 C600,290 520,300 474,300" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="214" y="272" width="256" height="56" rx="10" class="humTint"/>
+<text x="230" y="296" font-size="14" font-weight="700" text-anchor="start" class="humInk">човек: приема или поправя</text>
+<text x="230" y="316" font-size="11" font-weight="400" text-anchor="start" class="soft">с едно щракване | conf &lt; 0,5 -> 'Несигурно'</text>
+<path d="M212,272 C120,262 110,190 230,158" class="line" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<text x="30" y="190" font-size="11" font-weight="400" text-anchor="start" class="faint">новата категория</text>
+<text x="30" y="205" font-size="11" font-weight="400" text-anchor="start" class="faint">влиза в списъка</text>
+</svg>

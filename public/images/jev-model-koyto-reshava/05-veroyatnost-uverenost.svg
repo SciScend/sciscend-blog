@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Един и същ избор с висока и с ниска увереност">
+<title>Един и същ избор с висока и с ниска увереност</title>
+<style>
+  text { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif; fill: #353535; }
+  .soft { fill: #5c5f63; } .faint { fill: #7a7e83; }
+  .mono { font-family: ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace; }
+  .panel { fill: #f4f7f8; stroke: #e3e8ea; }
+  .card { fill: #ffffff; stroke: #d5dcdf; }
+  .line { stroke: #9aa0a5; fill: none; }
+  .ah { fill: #9aa0a5; }
+  .grid { stroke: #e3e8ea; }
+  .track { fill: #e3e8ea; }
+  .jev { fill: #0b6f68; } .jevTint { fill: #e3f6f4; stroke: #13b0a5; } .jevInk { fill: #0b6f68; }
+  .llm { fill: #0050a7; } .llmTint { fill: #e6eef8; stroke: #5b8fd0; } .llmInk { fill: #0050a7; }
+  .hum { fill: #b86a00; } .humTint { fill: #fbf0e0; stroke: #d99a3e; } .humInk { fill: #8a4f00; }
+  .mid { fill: #c9ced2; } .midTint { fill: #eef1f3; stroke: #b7bec3; }
+  .bar2 { fill: #b8bdc1; }
+  .onDark { fill: #ffffff; }
+  @media (prefers-color-scheme: dark) {
+    text { fill: #e7e9ea; }
+    .soft { fill: #b3b8bc; } .faint { fill: #8b9196; }
+    .panel { fill: #1b1f22; stroke: #2a3034; }
+    .card { fill: #131618; stroke: #353c41; }
+    .line { stroke: #6d7479; } .ah { fill: #6d7479; }
+    .grid { stroke: #2a3034; } .track { fill: #2a3034; }
+    .jev { fill: #2cc9bd; } .jevTint { fill: #15302e; stroke: #2cc9bd; } .jevInk { fill: #7fe3da; }
+    .llm { fill: #6fb0ff; } .llmTint { fill: #16253a; stroke: #4d7fbf; } .llmInk { fill: #9cc8ff; }
+    .hum { fill: #f0b050; } .humTint { fill: #35270f; stroke: #b8862e; } .humInk { fill: #f5c77a; }
+    .mid { fill: #4a5156; } .midTint { fill: #22272b; stroke: #454c51; }
+    .bar2 { fill: #5c6166; }
+    .onDark { fill: #131618; }
+  }
+</style>
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" class="ah"/>
+  </marker>
+</defs>
+
+<rect x="20" y="20" width="345" height="262" rx="12" class="panel"/>
+<text x="40" y="50" font-size="15" font-weight="700" text-anchor="start" class="mono">choice = A</text>
+<text x="40" y="72" font-size="14" font-weight="700" text-anchor="start" class="jevInk">висока увереност</text>
+<line x1="60" y1="220" x2="325" y2="220" class="line" stroke-width="1"/>
+<path d="M80,220 V98 Q80,94 84,94 H126 Q130,94 130,98 V220 Z" class="jev"/>
+<text x="105" y="86" font-size="13" font-weight="400" text-anchor="middle" class="soft">0.90</text>
+<text x="105" y="240" font-size="14" font-weight="600" text-anchor="middle">A</text>
+<path d="M165,220 V216 Q165,212 169,212 H211 Q215,212 215,216 V220 Z" class="bar2"/>
+<text x="190" y="204" font-size="13" font-weight="400" text-anchor="middle" class="soft">0.06</text>
+<text x="190" y="240" font-size="14" font-weight="600" text-anchor="middle">B</text>
+<path d="M250,220 V218 Q250,214 254,214 H296 Q300,214 300,218 V220 Z" class="bar2"/>
+<text x="275" y="206" font-size="13" font-weight="400" text-anchor="middle" class="soft">0.04</text>
+<text x="275" y="240" font-size="14" font-weight="600" text-anchor="middle">C</text>
+<text x="40" y="268" font-size="12" font-weight="400" text-anchor="start" class="faint">всичко е на една опция</text>
+<rect x="395" y="20" width="345" height="262" rx="12" class="panel"/>
+<text x="415" y="50" font-size="15" font-weight="700" text-anchor="start" class="mono">choice = A</text>
+<text x="415" y="72" font-size="14" font-weight="700" text-anchor="start" class="humInk">ниска увереност</text>
+<line x1="435" y1="220" x2="700" y2="220" class="line" stroke-width="1"/>
+<path d="M455,220 V168 Q455,164 459,164 H501 Q505,164 505,168 V220 Z" class="jev"/>
+<text x="480" y="156" font-size="13" font-weight="400" text-anchor="middle" class="soft">0.40</text>
+<text x="480" y="240" font-size="14" font-weight="600" text-anchor="middle">A</text>
+<path d="M540,220 V178 Q540,174 544,174 H586 Q590,174 590,178 V220 Z" class="bar2"/>
+<text x="565" y="166" font-size="13" font-weight="400" text-anchor="middle" class="soft">0.33</text>
+<text x="565" y="240" font-size="14" font-weight="600" text-anchor="middle">B</text>
+<path d="M625,220 V186 Q625,182 629,182 H671 Q675,182 675,186 V220 Z" class="bar2"/>
+<text x="650" y="174" font-size="13" font-weight="400" text-anchor="middle" class="soft">0.27</text>
+<text x="650" y="240" font-size="14" font-weight="600" text-anchor="middle">C</text>
+<text x="415" y="268" font-size="12" font-weight="400" text-anchor="start" class="faint">почти равномерно - А печели на косъм</text>
+</svg>

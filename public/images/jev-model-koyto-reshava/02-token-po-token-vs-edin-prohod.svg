@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 396" width="760" height="396" role="img" aria-label="LLM генерира токен по токен, System One моделът оценява всички опции с едно изчисление">
+<title>LLM генерира токен по токен, System One моделът оценява всички опции с едно изчисление</title>
+<style>
+  text { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif; fill: #353535; }
+  .soft { fill: #5c5f63; } .faint { fill: #7a7e83; }
+  .mono { font-family: ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace; }
+  .panel { fill: #f4f7f8; stroke: #e3e8ea; }
+  .card { fill: #ffffff; stroke: #d5dcdf; }
+  .line { stroke: #9aa0a5; fill: none; }
+  .ah { fill: #9aa0a5; }
+  .grid { stroke: #e3e8ea; }
+  .track { fill: #e3e8ea; }
+  .jev { fill: #0b6f68; } .jevTint { fill: #e3f6f4; stroke: #13b0a5; } .jevInk { fill: #0b6f68; }
+  .llm { fill: #0050a7; } .llmTint { fill: #e6eef8; stroke: #5b8fd0; } .llmInk { fill: #0050a7; }
+  .hum { fill: #b86a00; } .humTint { fill: #fbf0e0; stroke: #d99a3e; } .humInk { fill: #8a4f00; }
+  .mid { fill: #c9ced2; } .midTint { fill: #eef1f3; stroke: #b7bec3; }
+  .bar2 { fill: #b8bdc1; }
+  .onDark { fill: #ffffff; }
+  @media (prefers-color-scheme: dark) {
+    text { fill: #e7e9ea; }
+    .soft { fill: #b3b8bc; } .faint { fill: #8b9196; }
+    .panel { fill: #1b1f22; stroke: #2a3034; }
+    .card { fill: #131618; stroke: #353c41; }
+    .line { stroke: #6d7479; } .ah { fill: #6d7479; }
+    .grid { stroke: #2a3034; } .track { fill: #2a3034; }
+    .jev { fill: #2cc9bd; } .jevTint { fill: #15302e; stroke: #2cc9bd; } .jevInk { fill: #7fe3da; }
+    .llm { fill: #6fb0ff; } .llmTint { fill: #16253a; stroke: #4d7fbf; } .llmInk { fill: #9cc8ff; }
+    .hum { fill: #f0b050; } .humTint { fill: #35270f; stroke: #b8862e; } .humInk { fill: #f5c77a; }
+    .mid { fill: #4a5156; } .midTint { fill: #22272b; stroke: #454c51; }
+    .bar2 { fill: #5c6166; }
+    .onDark { fill: #131618; }
+  }
+</style>
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" class="ah"/>
+  </marker>
+</defs>
+
+<rect x="20" y="16" width="720" height="150" rx="14" class="llmTint"/>
+<text x="40" y="46" font-size="16" font-weight="700" text-anchor="start" class="llmInk">LLM: авторегресивно, токен по токен</text>
+<text x="40" y="68" font-size="12" font-weight="400" text-anchor="start" class="soft">всеки следващ токен зависи от предишните -&gt; толкова изчисления, колкото токена</text>
+<rect x="40" y="88" width="85" height="34" rx="7" class="card"/>
+<text x="82.5" y="110" font-size="14" font-weight="400" text-anchor="middle" class="mono">Отделът</text>
+<text x="82.5" y="142" font-size="11" font-weight="400" text-anchor="middle" class="faint">стъпка 1</text>
+<line x1="127" y1="105" x2="145" y2="105" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="149" y="88" width="52" height="34" rx="7" class="card"/>
+<text x="175.0" y="110" font-size="14" font-weight="400" text-anchor="middle" class="mono">е</text>
+<text x="175.0" y="142" font-size="11" font-weight="400" text-anchor="middle" class="faint">стъпка 2</text>
+<line x1="203" y1="105" x2="221" y2="105" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="225" y="88" width="67" height="34" rx="7" class="card"/>
+<text x="258.5" y="110" font-size="14" font-weight="400" text-anchor="middle" class="mono">'tech</text>
+<text x="258.5" y="142" font-size="11" font-weight="400" text-anchor="middle" class="faint">стъпка 3</text>
+<line x1="294" y1="105" x2="312" y2="105" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="316" y="88" width="76" height="34" rx="7" class="card"/>
+<text x="354.0" y="110" font-size="14" font-weight="400" text-anchor="middle" class="mono">nical'</text>
+<text x="354.0" y="142" font-size="11" font-weight="400" text-anchor="middle" class="faint">стъпка 4</text>
+<line x1="394" y1="105" x2="412" y2="105" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<rect x="416" y="88" width="52" height="34" rx="7" class="card"/>
+<text x="442.0" y="110" font-size="14" font-weight="400" text-anchor="middle" class="mono">.</text>
+<text x="442.0" y="142" font-size="11" font-weight="400" text-anchor="middle" class="faint">стъпка 5</text>
+<text x="560" y="100" font-size="12" font-weight="400" text-anchor="start" class="soft">5 токена = 5 изчисления</text>
+<text x="560" y="118" font-size="12" font-weight="400" text-anchor="start" class="soft">изходът се плаща</text>
+<text x="560" y="136" font-size="12" font-weight="400" text-anchor="start" class="soft">форматът може да се счупи</text>
+<rect x="20" y="184" width="720" height="196" rx="14" class="jevTint"/>
+<text x="40" y="214" font-size="16" font-weight="700" text-anchor="start" class="jevInk">System One модел: едно паралелно изчисление</text>
+<text x="40" y="236" font-size="12" font-weight="400" text-anchor="start" class="soft">моделът оценява всички твои опции наведнъж и връща вероятности</text>
+<rect x="40" y="262" width="150" height="86" rx="8" class="card"/>
+<text x="56" y="288" font-size="12" font-weight="400" text-anchor="start" class="soft">state:</text>
+<text x="56" y="306" font-size="12" font-weight="400" text-anchor="start" class="soft">'Бутонът за</text>
+<text x="56" y="324" font-size="12" font-weight="400" text-anchor="start" class="soft">експорт не работи...'</text>
+<rect x="230" y="280" width="90" height="50" rx="10" class="jev"/>
+<text x="275" y="311" font-size="17" font-weight="700" text-anchor="middle" class="onDark">Jev</text>
+<line x1="192" y1="305" x2="226" y2="305" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M322,305 C350,305 350,273 372,273" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<text x="380" y="278" font-size="13" font-weight="400" text-anchor="start" class="mono">billing</text>
+<rect x="462" y="265" width="150" height="16" rx="4" class="track"/>
+<path d="M462,265 H480 Q484,265 484,269 V277 Q484,281 480,281 H462 Z" class="jev"/>
+<text x="620" y="278" font-size="13" font-weight="400" text-anchor="start" class="soft">0.15</text>
+<path d="M322,305 C350,305 350,307 372,307" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<text x="380" y="312" font-size="13" font-weight="400" text-anchor="start" class="mono">technical</text>
+<rect x="462" y="299" width="150" height="16" rx="4" class="track"/>
+<path d="M462,299 H586 Q590,299 590,303 V311 Q590,315 586,315 H462 Z" class="jev"/>
+<text x="620" y="312" font-size="13" font-weight="400" text-anchor="start" class="soft">0.85</text>
+<path d="M322,305 C350,305 350,341 372,341" class="line" stroke-width="1.6" marker-end="url(#ah)"/>
+<text x="380" y="346" font-size="13" font-weight="400" text-anchor="start" class="mono">sales</text>
+<rect x="462" y="333" width="150" height="16" rx="4" class="track"/>
+
+<text x="620" y="346" font-size="13" font-weight="400" text-anchor="start" class="soft">0.00</text>
+<text x="40" y="372" font-size="12" font-weight="400" text-anchor="start" class="faint">1 изчисление -&gt; всички опции наведнъж | изходът е безплатен | само опции от твоя списък</text>
+</svg>
