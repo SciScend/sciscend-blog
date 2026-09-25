@@ -4,7 +4,7 @@ description: 'Jev е първият System One модел: вместо текс
 pubDate: 2026-09-24
 lang: bg
 tags: [system-one-models, jev, llm]
-draft: true
+draft: false
 ---
 
 Автоматизацията на всеки процес е свързана с вземането на множество малки решения: 
