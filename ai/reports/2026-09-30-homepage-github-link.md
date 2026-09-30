@@ -20,3 +20,8 @@ Besides the blog link, put a link to https://github.com/SciScend on sciscend.com
 
 ## Left open
 - The meta description still mentions only the blog; left unchanged.
+
+## Follow-up: pipe instead of arrows
+- Asked: drop the arrows, separate the two links with a pipe.
+- Now `Blog | GitHub`; the pipe is a muted `<span class="sep" aria-hidden="true">`.
+- Committed (`249f162`), pushed, deployed; `curl -s https://sciscend.com/` returns the new markup.
