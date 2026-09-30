@@ -70,7 +70,8 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2rem;
+            align-items: center;
+            gap: 1rem;
         }
         .links a {
             font-size: 1.125rem;
@@ -82,6 +83,10 @@
         .links a:hover {
             border-bottom-color: #38bdf8;
         }
+        .links .sep {
+            font-size: 1.125rem;
+            color: #64748b;
+        }
     </style>
 </head>
 <body>
@@ -91,8 +96,9 @@
     <p class="transition">and...</p>
     <div class="panic">Don't Panic!</div>
     <nav class="links">
-        <a href="/blog/">Blog →</a>
-        <a href="https://github.com/SciScend">GitHub →</a>
+        <a href="/blog/">Blog</a>
+        <span class="sep" aria-hidden="true">|</span>
+        <a href="https://github.com/SciScend">GitHub</a>
     </nav>
 </body>
 </html>
