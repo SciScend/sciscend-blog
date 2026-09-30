@@ -25,3 +25,7 @@ Besides the blog link, put a link to https://github.com/SciScend on sciscend.com
 - Asked: drop the arrows, separate the two links with a pipe.
 - Now `Blog | GitHub`; the pipe is a muted `<span class="sep" aria-hidden="true">`.
 - Committed (`249f162`), pushed, deployed; `curl -s https://sciscend.com/` returns the new markup.
+
+## Follow-up: open in a new tab
+- Both links now have `target="_blank" rel="noopener"`.
+- Committed (`afb7560`), pushed, deployed; verified with `curl -s https://sciscend.com/`.
