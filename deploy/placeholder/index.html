@@ -65,15 +65,21 @@
             border-radius: 0.375rem;
             display: inline-block;
         }
-        .blog-link {
+        .links {
             margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .links a {
             font-size: 1.125rem;
             font-weight: 600;
             color: #38bdf8;
             text-decoration: none;
             border-bottom: 2px solid transparent;
         }
-        .blog-link:hover {
+        .links a:hover {
             border-bottom-color: #38bdf8;
         }
     </style>
@@ -84,6 +90,9 @@
     <p class="tagline">The Future is Coming! Please fasten your seatbelts.</p>
     <p class="transition">and...</p>
     <div class="panic">Don't Panic!</div>
-    <a class="blog-link" href="/blog/">Blog →</a>
+    <nav class="links">
+        <a href="/blog/">Blog →</a>
+        <a href="https://github.com/SciScend">GitHub →</a>
+    </nav>
 </body>
 </html>
