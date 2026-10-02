@@ -16,7 +16,7 @@ npm run deploy       # build + rsync to the VPS (see deploy/README.md)
 ```
 
 A post is a Markdown file in `src/content/blog/`; its path is its URL. New posts
-are drafted and published with the `/new-post` Claude Code skill.
+are drafted and published with the `/blog-post` Claude Code skill.
 
 - [docs/tech-spec.md](docs/tech-spec.md) — how it is built, served and published
 - [deploy/README.md](deploy/README.md) — deploy and nginx runbook

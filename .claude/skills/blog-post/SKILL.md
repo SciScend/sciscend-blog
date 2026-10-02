@@ -1,9 +1,9 @@
 ---
-name: new-post
-description: Draft a new article for the SciScend blog (sciscend.com/blog) from Iva's topic and notes — Bulgarian by default, tagged with existing tags, checked for private data, saved as a draft. Also publishes a finished draft and writes a LinkedIn post for it. Use when Iva types /new-post, or asks to write, draft, publish or announce a blog article.
+name: blog-post
+description: Draft a new article for the SciScend blog (sciscend.com/blog) from Iva's topic and notes — Bulgarian by default, tagged with existing tags, checked for private data, saved as a draft. Also publishes a finished draft. Use when Iva types /blog-post, or asks to write, draft or publish a blog article.
 ---
 
-# /new-post — from topic to published article
+# /blog-post — from topic to published article
 
 The blog is Iva's voice: her tests, her position, her explanations. Your job is the
 mechanical and editorial work around that voice — drafting from her notes,
@@ -11,9 +11,12 @@ formatting, tags, checks, publishing. Never invent a test result, a benchmark
 number, a quote or an opinion she did not give you. If the notes are too thin to
 carry an article, say what is missing and ask; do not pad.
 
-    /new-post Тествах JeV на български текстове — бележки: …
-    /new-post publish jev-na-balgarski          # publish an existing draft
-    /new-post linkedin jev-na-balgarski         # LinkedIn text for a published post
+    /blog-post Тествах JeV на български текстове — бележки: …
+    /blog-post publish jev-na-balgarski          # publish an existing draft
+
+The LinkedIn post that announces a published article is not written here: it is
+`/linkedin-post from-blog <slug>` in the SciScend workspace, where all LinkedIn
+posts live.
 
 ## 1. Draft
 
@@ -72,7 +75,7 @@ carry an article, say what is missing and ask; do not pad.
 
 Stop here. Iva edits the text herself.
 
-## 3. Publish (`/new-post publish <slug>`)
+## 3. Publish (`/blog-post publish <slug>`)
 
 1. Set `draft: false`. If the post was drafted days ago, set `pubDate` to today
    (ask if unsure). If it was already published and is being corrected, leave
@@ -81,23 +84,5 @@ Stop here. Iva edits the text herself.
 3. Verify: `curl -s -o /dev/null -w "%{http_code}\n" https://sciscend.com/blog/<slug>/`
    returns 200, and the post appears in `https://sciscend.com/blog/rss.xml`.
 4. Commit (`Publish: <title>`) and push.
-
-## 4. LinkedIn (`/new-post linkedin <slug>`)
-
-Write a native LinkedIn post, in the post's language, 150–300 words:
-
-- the first two lines carry the hook — the one finding or claim worth stopping for;
-- the core insight in short paragraphs, readable without clicking;
-- 3–5 hashtags at the end;
-- **no link in the body** — give the link separately for the first comment
-  (LinkedIn shows posts with outbound links to fewer people).
-
-Write it in Iva's first-person voice ("аз"), like the article itself; "ние" is
-only for text that speaks as the company.
-
-Save it in the workspace, where all LinkedIn posts live, as
-`../SciScend/marketing/social/linkedin/YYYY-MM-DD-<slug>.md` (today's date), with
-the front matter described in that folder's `README.md`: `status: draft` and
-`blog_url` set to the article's URL. Show it to Iva. Posting is hers; once she
-confirms it is live, set `status: published` and `published:`, and commit in the
-workspace repo.
+5. Tell Iva the LinkedIn announcement is `/linkedin-post from-blog <slug>` in the
+   SciScend workspace.

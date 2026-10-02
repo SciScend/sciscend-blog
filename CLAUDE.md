@@ -6,7 +6,7 @@ workspace (`/data/projects/SciScend`), not here.
 
 ## Rules
 
-- **Posts** are written and published with the `/new-post` skill. Iva's voice and
+- **Posts** are written and published with the `/blog-post` skill. Iva's voice and
   opinions only — never invent results, numbers or quotes.
 - **Bulgarian by default**; technical terms stay in English (pipeline, prompt,
   fine-tuning — no literal translations). English posts go under `research/`.

@@ -85,7 +85,7 @@ sciscend-blog/
 │   ├── nginx-sciscend.conf     the live nginx site config — source of truth
 │   ├── placeholder/            the coming-soon page + root robots.txt
 │   └── README.md               runbook
-├── .claude/skills/new-post/    /new-post — draft, check, publish, LinkedIn text
+├── .claude/skills/blog-post/   /blog-post — draft, check, publish
 └── docs/tech-spec.md           this file
 ```
 
@@ -119,7 +119,7 @@ Frontmatter (validated by `src/content.config.ts`; a violation fails the build):
 - Every tag used by a published post gets `/blog/tag/<tag>/`; `/blog/tag/` lists
   them all with counts, most used first. Nothing is configured anywhere else.
 - **Synonym control** is procedural plus mechanical: the drafting agent runs
-  `npm run tags` and reuses existing tags (the `/new-post` skill requires it), and
+  `npm run tags` and reuses existing tags (the `/blog-post` skill requires it), and
   the schema rejects anything that is not lowercase kebab-case, so `LLMs`/`llm`
   cannot coexist.
 - Merging two tags later = edit the posts' frontmatter; the old tag page
@@ -195,18 +195,17 @@ the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
 
 ## 10. Publishing workflow
 
-`/new-post` (`.claude/skills/new-post/SKILL.md`):
+`/blog-post` (`.claude/skills/blog-post/SKILL.md`):
 
 1. **Draft** from Iva's topic and notes → `src/content/blog/<slug>.md`,
    `draft: true`, tags reused via `npm run tags`.
 2. **Check**: `npm run build`; the workspace's `bin/redact-private-data.py
    --dry-run` plus the `check-private-data` reading pass; public wording rules.
 3. **Iva edits**, previewing with `npm run dev`.
-4. **Publish** (`/new-post publish <slug>`): `draft: false` → `npm run deploy` →
+4. **Publish** (`/blog-post publish <slug>`): `draft: false` → `npm run deploy` →
    verify 200 + RSS → commit and push.
-5. **LinkedIn** (`/new-post linkedin <slug>`): native post, link in the first
-   comment, saved in the workspace as
-   `SciScend/marketing/social/linkedin/YYYY-MM-DD-<slug>.md`.
+5. **LinkedIn**: `/linkedin-post from-blog <slug>` in the SciScend workspace
+   writes the announcement into `marketing/social/linkedin/`.
 
 ## 11. Verification (2026-09-22)
 
