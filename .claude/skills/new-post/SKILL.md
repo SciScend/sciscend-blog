@@ -92,5 +92,12 @@ Write a native LinkedIn post, in the post's language, 150–300 words:
 - **no link in the body** — give the link separately for the first comment
   (LinkedIn shows posts with outbound links to fewer people).
 
-Save it as `social/linkedin/<slug>.md` so it is versioned with the post, and show
-it to Iva. Posting is hers.
+Write it in Iva's first-person voice ("аз"), like the article itself; "ние" is
+only for text that speaks as the company.
+
+Save it in the workspace, where all LinkedIn posts live, as
+`../SciScend/marketing/social/linkedin/YYYY-MM-DD-<slug>.md` (today's date), with
+the front matter described in that folder's `README.md`: `status: draft` and
+`blog_url` set to the article's URL. Show it to Iva. Posting is hers; once she
+confirms it is live, set `status: published` and `published:`, and commit in the
+workspace repo.

@@ -205,7 +205,8 @@ the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
 4. **Publish** (`/new-post publish <slug>`): `draft: false` → `npm run deploy` →
    verify 200 + RSS → commit and push.
 5. **LinkedIn** (`/new-post linkedin <slug>`): native post, link in the first
-   comment, saved to `social/linkedin/<slug>.md`.
+   comment, saved in the workspace as
+   `SciScend/marketing/social/linkedin/YYYY-MM-DD-<slug>.md`.
 
 ## 11. Verification (2026-09-22)
 
