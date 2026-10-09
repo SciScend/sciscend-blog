@@ -29,6 +29,12 @@ const blog = defineCollection({
     tags: z.array(TAG).default([]),
     /** Share image, relative to /public (e.g. "images/jev/cover.png"). */
     heroImage: z.string().optional(),
+    /**
+     * Path of the redacted session transcript the post came from, in the
+     * SciScend workspace (e.g. "ai/sessions/published/2026-07-28-x.md").
+     * A record for Iva; never rendered or published.
+     */
+    transcript: z.string().optional(),
     /** Drafts are visible in `npm run dev`, never in a production build. */
     draft: z.boolean().default(false),
   }),
