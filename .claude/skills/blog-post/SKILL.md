@@ -1,6 +1,6 @@
 ---
 name: blog-post
-description: Draft a new article for the SciScend blog (sciscend.com/blog) from Iva's topic and notes — Bulgarian by default, tagged with existing tags, checked for private data, saved as a draft. Also publishes a finished draft. Use when Iva types /blog-post, or asks to write, draft or publish a blog article.
+description: Draft a new article for the SciScend blog (sciscend.com/blog) from Iva's topic and notes - asks for the language (Bulgarian or English) and the placement (blog root or research/), tags it with existing tags, checks it for private data, saves it as a draft. Also publishes a finished draft. Use when Iva types /blog-post, or asks to write, draft or publish a blog article.
 ---
 
 # /blog-post — from topic to published article
@@ -12,10 +12,11 @@ number, a quote or an opinion she did not give you. If the notes are too thin to
 carry an article, say what is missing and ask; do not pad.
 
     /blog-post Тествах JeV на български текстове — бележки: …
+    /blog-post en, root: How I use Claude Code - notes: ...   # no question needed
     /blog-post publish jev-na-balgarski          # publish an existing draft
 
 The LinkedIn post that announces a published article is not written here: it is
-`/linkedin-post from-blog <slug>` in the SciScend workspace, where all LinkedIn
+`/linkedin-post from-blog <path>` in the SciScend workspace, where all LinkedIn
 posts live.
 
 ## 1. Draft
@@ -24,13 +25,22 @@ posts live.
    Iva points to. For facts about a new model or tool, check the primary source
    (vendor page, paper, model card) and cite it in the text; say so when you could
    not verify something.
-2. **Language.** Bulgarian unless Iva says otherwise (`lang: bg`). Technical terms
-   stay in English — pipeline, prompt, fine-tuning, benchmark, commit — never
-   literal translations. English posts (`lang: en`) go under `research/`.
-3. **Slug and file.** `src/content/blog/<slug>.md` (or `.mdx` if the post needs
-   components). The slug is short, Latin, kebab-case, transliterated from the
-   Bulgarian title, no date: `jev-na-balgarski`, not `2026-09-22-jev`. The slug is
-   the permanent URL, so choose it once.
+2. **Language and placement.** Unless the prompt already says both, ask Iva
+   before drafting, in one question:
+   - language: Bulgarian (`lang: bg`, the default) or English (`lang: en`);
+   - placement: the blog root, `/blog/<slug>/` (the default, for every post that
+     is not R&D), or `research/`, `/blog/research/<slug>/` (R&D texts).
+
+   In Bulgarian text, technical terms stay in English - pipeline, prompt,
+   fine-tuning, benchmark, commit - never literal translations.
+3. **Slug and file.** `src/content/blog/<slug>.md`, or
+   `src/content/blog/research/<slug>.md` for the research placement (`.mdx` if
+   the post needs components). The slug is short, Latin, kebab-case, no date,
+   transliterated if the title is Bulgarian: `jev-na-balgarski`, not
+   `2026-09-22-jev`. The file's path without the extension, `<slug>` or
+   `research/<slug>`, is the `<path>`: the URL after `/blog/`, and what
+   `/blog-post publish` and `/linkedin-post from-blog` take. It is permanent, so
+   choose it once.
 4. **Tags.** Run `npm run tags` and **reuse** existing tags. Add a new tag only
    when the topic is genuinely new, and never a near-duplicate (`llm` exists →
    not `llms`, not `language-models`). Lowercase kebab-case, English, 2–5 per
@@ -42,7 +52,7 @@ posts live.
    title: '…'                 # ≤ 70 characters, says what the reader gets
    description: '…'           # 120–160 characters; meta description + share text
    pubDate: YYYY-MM-DD        # today
-   lang: bg
+   lang: bg                   # or en, from step 2
    tags: [ … ]
    draft: true
    ---
@@ -71,18 +81,18 @@ posts live.
    registered yet). Never "д-р", "PhD" or "доктор" for Iva — the approved author
    wording is in `src/site.config.ts`.
 4. Tell Iva the draft is ready and how to see it: `npm run dev` →
-   `http://localhost:4321/blog/<slug>/` (drafts are visible only in dev).
+   `http://localhost:4321/blog/<path>/` (drafts are visible only in dev).
 
 Stop here. Iva edits the text herself.
 
-## 3. Publish (`/blog-post publish <slug>`)
+## 3. Publish (`/blog-post publish <path>`)
 
 1. Set `draft: false`. If the post was drafted days ago, set `pubDate` to today
    (ask if unsure). If it was already published and is being corrected, leave
    `pubDate` and set `updatedDate` to today instead.
 2. `npm run build`, then `npm run deploy`.
-3. Verify: `curl -s -o /dev/null -w "%{http_code}\n" https://sciscend.com/blog/<slug>/`
+3. Verify: `curl -s -o /dev/null -w "%{http_code}\n" https://sciscend.com/blog/<path>/`
    returns 200, and the post appears in `https://sciscend.com/blog/rss.xml`.
 4. Commit (`Publish: <title>`) and push.
-5. Tell Iva the LinkedIn announcement is `/linkedin-post from-blog <slug>` in the
+5. Tell Iva the LinkedIn announcement is `/linkedin-post from-blog <path>` in the
    SciScend workspace.

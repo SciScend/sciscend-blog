@@ -18,7 +18,7 @@ Why it exists in this form is recorded in the SciScend workspace,
 |---|---|
 | Article list, article pages, tag (category) pages | The company website — `sciscend-web` is on hold and will be redone |
 | RSS, sitemap, `llms.txt`, JSON-LD, Open Graph | Comments, newsletter, search, analytics |
-| Bulgarian posts; English posts under `/blog/research/` | `hreflang` pairs (added with the first translated post) |
+| Posts in Bulgarian or English at `/blog/<slug>/`; R&D texts under `/blog/research/` | `hreflang` pairs (added with the first translated post) |
 | The coming-soon placeholder at `/` and the nginx config | The "Building SciScend" series — stays in the workspace, published later |
 
 ## 2. Requirements
@@ -109,7 +109,7 @@ Frontmatter (validated by `src/content.config.ts`; a violation fails the build):
 | `description` | string | yes | 120–160 characters; meta description, OG, RSS, listing |
 | `pubDate` | date | yes | |
 | `updatedDate` | date | no | set when a published post is corrected |
-| `lang` | `bg` \| `en` | no, default `bg` | rendered as `<article lang>`; `en` posts go under `research/` |
+| `lang` | `bg` \| `en` | no, default `bg` | rendered as `<article lang>`; does not set the path - `research/` is for R&D texts |
 | `tags` | string[] | no | lowercase kebab-case (`/^[a-z0-9]+(-[a-z0-9]+)*$/`), English |
 | `heroImage` | string | no | path relative to `public/`; falls back to `og-default.png` |
 | `draft` | boolean | no, default `false` | drafts render in `npm run dev` only |
@@ -197,15 +197,17 @@ the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
 
 `/blog-post` (`.claude/skills/blog-post/SKILL.md`):
 
-1. **Draft** from Iva's topic and notes → `src/content/blog/<slug>.md`,
+1. **Draft** from Iva's topic and notes, after asking for the language (`bg` or
+   `en`) and the placement (root or `research/`) -> `src/content/blog/<path>.md`,
    `draft: true`, tags reused via `npm run tags`.
 2. **Check**: `npm run build`; the workspace's `bin/redact-private-data.py
    --dry-run` plus the `check-private-data` reading pass; public wording rules.
 3. **Iva edits**, previewing with `npm run dev`.
-4. **Publish** (`/blog-post publish <slug>`): `draft: false` → `npm run deploy` →
-   verify 200 + RSS → commit and push.
-5. **LinkedIn**: `/linkedin-post from-blog <slug>` in the SciScend workspace
-   writes the announcement into `marketing/social/linkedin/`.
+4. **Publish** (`/blog-post publish <path>`): `draft: false` -> `npm run deploy` ->
+   verify 200 + RSS -> commit and push.
+5. **LinkedIn**: `/linkedin-post from-blog <path>` in the SciScend workspace
+   writes the announcement into `marketing/social/linkedin/`, after asking for its
+   language and channel.
 
 ## 11. Verification (2026-09-22)
 

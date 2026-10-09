@@ -8,8 +8,10 @@ workspace (`/data/projects/SciScend`), not here.
 
 - **Posts** are written and published with the `/blog-post` skill. Iva's voice and
   opinions only — never invent results, numbers or quotes.
-- **Bulgarian by default**; technical terms stay in English (pipeline, prompt,
-  fine-tuning — no literal translations). English posts go under `research/`.
+- **Language and placement per post** (`/blog-post` asks): Bulgarian by default,
+  English when the post warrants it. Posts sit at the root, `/blog/<slug>/`;
+  `research/` is for R&D texts. In Bulgarian text, technical terms stay in English
+  (pipeline, prompt, fine-tuning - no literal translations).
 - **Tags**: run `npm run tags` and reuse; lowercase kebab-case, English.
 - **Slugs and tag names are permanent URLs.** Don't rename a published one
   without adding an nginx 301 in `deploy/nginx-sciscend.conf`.
