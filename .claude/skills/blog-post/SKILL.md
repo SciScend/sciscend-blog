@@ -29,16 +29,18 @@ posts live.
    before drafting, in one question:
    - language: Bulgarian (`lang: bg`, the default) or English (`lang: en`);
    - placement: the blog root, `/blog/<slug>/` (the default, for every post that
-     is not R&D), or `research/`, `/blog/research/<slug>/` (R&D texts).
+     is not R&D or the series), `research/` for R&D texts, or `sciscend-building/`
+     for the "Building SciScend with AI" series (normally drafted by
+     `/blogworthy` in the SciScend workspace).
 
    In Bulgarian text, technical terms stay in English - pipeline, prompt,
    fine-tuning, benchmark, commit - never literal translations.
 3. **Slug and file.** `src/content/blog/<slug>.md`, or
-   `src/content/blog/research/<slug>.md` for the research placement (`.mdx` if
-   the post needs components). The slug is short, Latin, kebab-case, no date,
+   `src/content/blog/<folder>/<slug>.md` for the `research/` and
+   `sciscend-building/` placements (`.mdx` if the post needs components). The slug is short, Latin, kebab-case, no date,
    transliterated if the title is Bulgarian: `jev-na-balgarski`, not
    `2026-09-22-jev`. The file's path without the extension, `<slug>` or
-   `research/<slug>`, is the `<path>`: the URL after `/blog/`, and what
+   `<folder>/<slug>`, is the `<path>`: the URL after `/blog/`, and what
    `/blog-post publish` and `/linkedin-post from-blog` take. It is permanent, so
    choose it once.
 4. **Tags.** Run `npm run tags` and **reuse** existing tags. Add a new tag only

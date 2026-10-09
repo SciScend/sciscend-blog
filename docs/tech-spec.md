@@ -19,7 +19,8 @@ Why it exists in this form is recorded in the SciScend workspace,
 | Article list, article pages, tag (category) pages | The company website — `sciscend-web` is on hold and will be redone |
 | RSS, sitemap, `llms.txt`, JSON-LD, Open Graph | Comments, newsletter, search, analytics |
 | Posts in Bulgarian or English at `/blog/<slug>/`; R&D texts under `/blog/research/` | `hreflang` pairs (added with the first translated post) |
-| The coming-soon placeholder at `/` and the nginx config | The "Building SciScend" series — stays in the workspace, published later |
+| The coming-soon placeholder at `/` and the nginx config | |
+| The "Building SciScend with AI" series under `/blog/sciscend-building/` (drafts; moved from the workspace 2026-10-09) | |
 
 ## 2. Requirements
 
@@ -97,6 +98,7 @@ One Markdown/MDX file per post in `src/content/blog/`. The path is the URL:
 |---|---|
 | `src/content/blog/jev-na-balgarski.md` | `/blog/jev-na-balgarski/` |
 | `src/content/blog/research/foo.md` | `/blog/research/foo/` |
+| `src/content/blog/sciscend-building/foo.md` | `/blog/sciscend-building/foo/` |
 
 Slugs are Latin, kebab-case, transliterated, without a date; a slug is a permanent
 URL and is chosen once.
@@ -109,7 +111,7 @@ Frontmatter (validated by `src/content.config.ts`; a violation fails the build):
 | `description` | string | yes | 120–160 characters; meta description, OG, RSS, listing |
 | `pubDate` | date | yes | |
 | `updatedDate` | date | no | set when a published post is corrected |
-| `lang` | `bg` \| `en` | no, default `bg` | rendered as `<article lang>`; does not set the path - `research/` is for R&D texts |
+| `lang` | `bg` \| `en` | no, default `bg` | rendered as `<article lang>`; does not set the path - `research/` is for R&D texts, `sciscend-building/` for the series |
 | `tags` | string[] | no | lowercase kebab-case (`/^[a-z0-9]+(-[a-z0-9]+)*$/`), English |
 | `heroImage` | string | no | path relative to `public/`; falls back to `og-default.png` |
 | `draft` | boolean | no, default `false` | drafts render in `npm run dev` only |
@@ -198,8 +200,11 @@ the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
 `/blog-post` (`.claude/skills/blog-post/SKILL.md`):
 
 1. **Draft** from Iva's topic and notes, after asking for the language (`bg` or
-   `en`) and the placement (root or `research/`) -> `src/content/blog/<path>.md`,
-   `draft: true`, tags reused via `npm run tags`.
+   `en`) and the placement (root, `research/` or `sciscend-building/`) ->
+   `src/content/blog/<path>.md`, `draft: true`, tags reused via `npm run tags`.
+   Series posts are drafted instead by `/blogworthy` in the SciScend workspace,
+   from a real session, into `sciscend-building/`; from step 2 on they follow the
+   same steps.
 2. **Check**: `npm run build`; the workspace's `bin/redact-private-data.py
    --dry-run` plus the `check-private-data` reading pass; public wording rules.
 3. **Iva edits**, previewing with `npm run dev`.
