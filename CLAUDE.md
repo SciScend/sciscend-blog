@@ -10,7 +10,7 @@ workspace (`/data/projects/SciScend`), not here.
   opinions only — never invent results, numbers or quotes.
 - **Language and placement per post** (`/blog-post` asks): Bulgarian by default,
   English when the post warrants it. Posts sit at the root, `/blog/<slug>/`;
-  `research/` is for R&D texts, `sciscend-building/` for the "Building SciScend
+  `research/` is for R&D texts, `building-sciscend/` for the "Building SciScend
   with AI" series (English, drafted by `/blogworthy` in the workspace). In Bulgarian text, technical terms stay in English
   (pipeline, prompt, fine-tuning - no literal translations).
 - **Tags**: run `npm run tags` and reuse; lowercase kebab-case, English.

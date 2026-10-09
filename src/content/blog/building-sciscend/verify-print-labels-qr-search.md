@@ -4,6 +4,7 @@ description: 'I asked an agent whether a feature it had built actually works. Th
 pubDate: 2026-09-17
 lang: en
 tags: [building-in-public, ai-agents, claude-code, verification, pwa, capacitor]
+transcript: ai/sessions/published/2026-09-17-verify-print-labels-qr-search.md
 draft: true
 ---
 
@@ -129,12 +130,7 @@ slug and put the prompt back at the top by hand.
 Next: actually running the PDF test, and deciding whether the Android build gets
 native printing or simply hides the button.
 
----
-
-*Full session transcript: [2026-09-17-verify-print-labels-qr-search](../../../ai/sessions/published/2026-09-17-verify-print-labels-qr-search.md)*
-
 <!-- DRAFT NOTES (remove before publishing):
-Source session in the SciScend workspace: ai/sessions/published/2026-09-17-verify-print-labels-qr-search.md
 - Run the Save-as-PDF test and add the result (screenshot of the label sheet?) before publishing.
 - Confirm the Android no-op on a real device; the post currently says "most likely".
 - products/showcase/repos/ lacks a StorageBoxOrganizer symlink; add it or drop that sentence.

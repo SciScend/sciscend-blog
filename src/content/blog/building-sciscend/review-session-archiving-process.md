@@ -4,6 +4,7 @@ description: 'I asked an AI to audit the session-archiving workflow I had design
 pubDate: 2026-07-25
 lang: en
 tags: [building-in-public, ai-agents, claude-code, tooling, solo-founder]
+transcript: ai/sessions/published/2026-07-25-review-session-archiving-process.md
 draft: true
 ---
 
@@ -128,14 +129,10 @@ transcripts within minutes of running the thing.
   version upgrade mid-session: no amount of reading the code would have found
   these.
 
-The full transcript of this session, including the parts where I pushed back, is
-[in the repo](../../../ai/sessions/published/2026-07-25-review-session-archiving-process.md).
-
 *Next in the series: registering a Bulgarian ЕООД with an AI-drafted legal
 package — no lawyer, no intermediary, 55 лв. in state fees.*
 
 <!-- DRAFT NOTES (remove before publishing):
-Source session in the SciScend workspace: ai/sessions/published/2026-07-25-review-session-archiving-process.md
 - Decide repo visibility before linking the transcript publicly.
 - Possible screenshot: the session list showing the twin sessions before the fix.
 -->

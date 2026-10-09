@@ -29,7 +29,7 @@ posts live.
    before drafting, in one question:
    - language: Bulgarian (`lang: bg`, the default) or English (`lang: en`);
    - placement: the blog root, `/blog/<slug>/` (the default, for every post that
-     is not R&D or the series), `research/` for R&D texts, or `sciscend-building/`
+     is not R&D or the series), `research/` for R&D texts, or `building-sciscend/`
      for the "Building SciScend with AI" series (normally drafted by
      `/blogworthy` in the SciScend workspace).
 
@@ -37,7 +37,7 @@ posts live.
    fine-tuning, benchmark, commit - never literal translations.
 3. **Slug and file.** `src/content/blog/<slug>.md`, or
    `src/content/blog/<folder>/<slug>.md` for the `research/` and
-   `sciscend-building/` placements (`.mdx` if the post needs components). The slug is short, Latin, kebab-case, no date,
+   `building-sciscend/` placements (`.mdx` if the post needs components). The slug is short, Latin, kebab-case, no date,
    transliterated if the title is Bulgarian: `jev-na-balgarski`, not
    `2026-09-22-jev`. The file's path without the extension, `<slug>` or
    `<folder>/<slug>`, is the `<path>`: the URL after `/blog/`, and what

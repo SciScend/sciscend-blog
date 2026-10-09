@@ -4,6 +4,7 @@ description: 'Three sentences built the app. Eight more words, ''make sure it wo
 pubDate: 2026-07-28
 lang: en
 tags: [building-in-public, ai-agents, claude-code, testing, vanilla-js]
+transcript: ai/sessions/published/2026-07-28-meme-collagen-build.md
 draft: true
 ---
 
@@ -178,14 +179,14 @@ receipts are all there.
 
 - **Try it:** <https://sciscend.github.io/meme-collagen/>
 - **Source:** <https://github.com/SciScend/meme-collagen>
-- **Full session transcript:** [2026-07-28-meme-collagen-build.md](../../../ai/sessions/published/2026-07-28-meme-collagen-build.md)
 
 Next: publishing it properly — why company code goes to an organization account
 from the first commit, and how one machine juggles several git identities
 without ever committing under the wrong one.
 
 <!-- DRAFT NOTES (remove before publishing):
-Source session in the SciScend workspace: ai/sessions/published/2026-07-28-meme-collagen-build.md
+- The paragraph before "Try it" still says the transcript is linked below; the
+  link moved to the `transcript:` frontmatter, so reword or drop that sentence.
 - CODE_OF_CONDUCT.md in the repo still had CONTACT_EMAIL_HERE at publish time; set
   to lab@sciscend.com. Change if abuse reports should go elsewhere.
 - No screenshots embedded in this post yet. docs/screenshot.png, docs/crop.png and
