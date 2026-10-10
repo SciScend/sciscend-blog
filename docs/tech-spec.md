@@ -100,8 +100,10 @@ One Markdown/MDX file per post in `src/content/blog/`. The path is the URL:
 | `src/content/blog/research/foo.md` | `/blog/research/foo/` |
 | `src/content/blog/building-sciscend/foo.md` | `/blog/building-sciscend/foo/` |
 
-Slugs are Latin, kebab-case, transliterated, without a date; a slug is a permanent
-URL and is chosen once.
+Slugs are Latin, kebab-case, transliterated, without a date, 2-5 words and at
+most 40 characters, specific about the topic; the full rule is in the
+`/blog-post` skill (step 1.3). A slug is free to change until the post is
+published; after that it is a permanent URL.
 
 Frontmatter (validated by `src/content.config.ts`; a violation fails the build):
 

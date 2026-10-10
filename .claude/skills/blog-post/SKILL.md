@@ -37,12 +37,22 @@ posts live.
    fine-tuning, benchmark, commit - never literal translations.
 3. **Slug and file.** `src/content/blog/<slug>.md`, or
    `src/content/blog/<folder>/<slug>.md` for the `research/` and
-   `building-sciscend/` placements (`.mdx` if the post needs components). The slug is short, Latin, kebab-case, no date,
-   transliterated if the title is Bulgarian: `jev-na-balgarski`, not
-   `2026-09-22-jev`. The file's path without the extension, `<slug>` or
-   `<folder>/<slug>`, is the `<path>`: the URL after `/blog/`, and what
-   `/blog-post publish` and `/linkedin-post from-blog` take. It is permanent, so
-   choose it once.
+   `building-sciscend/` placements (`.mdx` if the post needs components). The
+   file's path without the extension, `<slug>` or `<folder>/<slug>`, is the
+   `<path>`: the URL after `/blog/`, and what `/blog-post publish` and
+   `/linkedin-post from-blog` take. The slug rule:
+   - Latin, kebab-case, no date; transliterated if the title is Bulgarian:
+     `jev-na-balgarski`, not `2026-09-22-jev`;
+   - 2-5 words, at most 40 characters;
+   - specific: keep the words that say what the post is about, including the
+     object: `two-agent-company-naming-pipeline`, not `two-agent-naming-pipeline`;
+   - no filler words (a, the, how, i, my, with, of, to) and no repeat of the
+     folder name (no `sciscend` inside `building-sciscend/`);
+   - shorten only a slug that breaks these limits; do not reword one that fits.
+
+   A slug can change freely until the post is published. After that it is a
+   permanent URL, and changing it needs an nginx 301 in
+   `deploy/nginx-sciscend.conf`.
 4. **Tags.** Run `npm run tags` and **reuse** existing tags. Add a new tag only
    when the topic is genuinely new, and never a near-duplicate (`llm` exists →
    not `llms`, not `language-models`). Lowercase kebab-case, English, 2–5 per
