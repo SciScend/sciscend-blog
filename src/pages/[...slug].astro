@@ -2,7 +2,7 @@
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE, url } from '../site.config.ts';
-import { getPosts, formatDate, readingMinutes, type Post } from '../lib/posts.ts';
+import { getPosts, formatDate, readingMinutes, isNews, type Post } from '../lib/posts.ts';
 import { postSchema } from '../lib/schema.ts';
 
 export async function getStaticPaths() {
@@ -37,6 +37,7 @@ const minutes = readingMinutes(post.body);
       <p class="lede">{d.description}</p>
       <div class="meta" lang="bg">
         <time datetime={d.pubDate.toISOString()}>{formatDate(d.pubDate)}</time>
+        {isNews(post) && <a class="news-badge" href={url('novini')}>новина</a>}
         {d.updatedDate && <span>обновена {formatDate(d.updatedDate)}</span>}
         <span>{minutes} мин. четене</span>
         {d.draft && <span class="draft-badge">чернова</span>}

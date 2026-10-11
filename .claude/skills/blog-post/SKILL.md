@@ -1,6 +1,6 @@
 ---
 name: blog-post
-description: Draft a new article for the SciScend blog (sciscend.com/blog) from Iva's topic and notes - asks for the language (Bulgarian or English) and the placement (blog root or research/), tags it with existing tags, checks it for private data, saves it as a draft. Also publishes a finished draft. Use when Iva types /blog-post, or asks to write, draft or publish a blog article.
+description: Draft a new article or news item for the SciScend blog (sciscend.com/blog) from Iva's topic and notes - asks for the language (Bulgarian or English) and the placement (blog root, research/ or the novini/ news section), tags it with existing tags, checks it for private data, saves it as a draft. Also publishes a finished draft. Use when Iva types /blog-post, or asks to write, draft or publish a blog article or a news item.
 ---
 
 # /blog-post — from topic to published article
@@ -14,6 +14,7 @@ carry an article, say what is missing and ask; do not pad.
     /blog-post Тествах JeV на български текстове — бележки: …
     /blog-post en, root: How I use Claude Code - notes: ...   # no question needed
     /blog-post publish jev-na-balgarski          # publish an existing draft
+    /blog-post news: <notes, or a LinkedIn post file>   # a news item in novini/
 
 The LinkedIn post that announces a published article is not written here: it is
 `/linkedin-post from-blog <path>` in the SciScend workspace, where all LinkedIn
@@ -29,14 +30,15 @@ posts live.
    before drafting, in one question:
    - language: Bulgarian (`lang: bg`, the default) or English (`lang: en`);
    - placement: the blog root, `/blog/<slug>/` (the default, for every post that
-     is not R&D or the series), `research/` for R&D texts, or `building-sciscend/`
+     is not R&D, news or the series), `research/` for R&D texts, `novini/` for a
+     news item (short, follows the News format below), or `building-sciscend/`
      for the "Building SciScend with AI" series (normally drafted by
      `/blogworthy` in the SciScend workspace).
 
    In Bulgarian text, technical terms stay in English - pipeline, prompt,
    fine-tuning, benchmark, commit - never literal translations.
 3. **Slug and file.** `src/content/blog/<slug>.md`, or
-   `src/content/blog/<folder>/<slug>.md` for the `research/` and
+   `src/content/blog/<folder>/<slug>.md` for the `research/`, `novini/` and
    `building-sciscend/` placements (`.mdx` if the post needs components). The
    file's path without the extension, `<slug>` or `<folder>/<slug>`, is the
    `<path>`: the URL after `/blog/`, and what `/blog-post publish` and
@@ -75,13 +77,38 @@ posts live.
    Beginner posts explain every step; test posts show the setup, the inputs and
    the actual outputs so a reader can repeat them. End with Iva's conclusion in
    her words from the notes — not a generic summary.
-7. **Images** go to `public/images/<slug>/` and are referenced as
+7. **News items** follow the News format below instead of the article shape.
+8. **Images** go to `public/images/<slug>/` and are referenced as
    `/blog/images/<slug>/<file>`. Set `heroImage: images/<slug>/<file>` if one
    should be the share image.
 
+## News format (`novini/`)
+
+A news item is a short take on something new in AI: what happened, then what Iva
+thinks of it. It can start anywhere: from scratch here, or from one of her
+LinkedIn posts in `/data/projects/SciScend/marketing/social/linkedin/` (copy her
+text as is), and a LinkedIn post can also follow it. Whichever comes first, the
+blog version looks the same:
+
+- 100-300 words of plain paragraphs, no `##` sections;
+- first what happened, then Iva's take, in her words;
+- the source is linked in the text (`[REA](https://github.com/...)`), not in a
+  "first comment";
+- no hashtags and no LinkedIn leftovers ("линкът е в първия коментар"); topics go
+  into 2-4 `tags`;
+- a dated wording ("Днес (11.10.2026)") is fine: a news item is dated;
+- `heroImage` optional; reuse the LinkedIn image if there is one, copied to
+  `public/images/<slug>/`.
+
+`npm run check:news` (also run by every `npm run build`) checks these rules
+mechanically, plus title, description, tags and slug. A published item that breaks
+them fails the build; a draft only gets warnings. When a LinkedIn post and a news
+item exist for the same news, set `blog_url:` in the LinkedIn file's front matter.
+
 ## 2. Check
 
-1. `npm run build` must pass (the schema validates the frontmatter).
+1. `npm run build` must pass (the schema validates the frontmatter; for a news
+   item, `check-news.mjs` validates the format).
 2. **Private data.** The post is about to become public:
    - `/data/projects/SciScend/bin/redact-private-data.py <file> --dry-run`
    - then do the reading pass described in

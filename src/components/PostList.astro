@@ -1,6 +1,6 @@
 ---
 import { url } from '../site.config.ts';
-import { formatDate, type Post } from '../lib/posts.ts';
+import { formatDate, isNews, type Post } from '../lib/posts.ts';
 
 interface Props {
   posts: Post[];
@@ -15,6 +15,7 @@ const { posts } = Astro.props;
         <div class="meta">
           <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
           {post.data.lang === 'en' && <span> · English</span>}
+          {isNews(post) && <span class="news-badge">новина</span>}
           {post.data.draft && <span class="draft-badge">чернова</span>}
         </div>
         <h2>

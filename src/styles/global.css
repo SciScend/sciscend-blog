@@ -225,6 +225,18 @@ main.wrap {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+.news-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0 0.4rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: var(--link);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
 .empty {
   color: var(--ink-soft);
   font-style: italic;

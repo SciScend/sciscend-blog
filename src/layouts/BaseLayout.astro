@@ -74,6 +74,7 @@ const path = Astro.url.pathname;
         </a>
         <nav class="site-nav" aria-label="Навигация на блога">
           <a href={url()} aria-current={path === url() ? 'page' : undefined}>Статии</a>
+          <a href={url('novini')} aria-current={path.startsWith(url('novini')) ? 'page' : undefined}>Новини</a>
           <a href={url('tag')} aria-current={path.startsWith(url('tag')) ? 'page' : undefined}>Категории</a>
           <a href={`${BLOG_URL}rss.xml`}>RSS</a>
         </nav>

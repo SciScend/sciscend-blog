@@ -6,10 +6,11 @@
   "description": "Блогът на SciScend — sciscend.com/blog. Static Astro site, served by nginx.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/check-news.mjs && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "tags": "node scripts/tags.mjs",
+    "check:news": "node scripts/check-news.mjs",
     "deploy": "bash deploy/deploy.sh",
     "deploy:placeholder": "bash deploy/deploy-placeholder.sh"
   },

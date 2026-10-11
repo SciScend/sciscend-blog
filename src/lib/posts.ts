@@ -8,6 +8,14 @@ export async function getPosts(): Promise<Post[]> {
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
+/** Folder of the news section: src/content/blog/novini/ -> /blog/novini/<slug>/. */
+export const NEWS_DIR = 'novini';
+
+/** A news item is any post in the news folder; no frontmatter field needed. */
+export function isNews(post: Post): boolean {
+  return post.id.startsWith(`${NEWS_DIR}/`);
+}
+
 /** Every tag in use, with its post count, most used first. */
 export function tagCounts(posts: Post[]): Array<{ tag: string; count: number }> {
   const counts = new Map<string, number>();

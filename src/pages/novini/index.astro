@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts, isNews } from '../../lib/posts.ts';
+
+// The news section: every post in src/content/blog/novini/, newest first.
+// News items also appear in the main list, marked "новина".
+const news = (await getPosts()).filter(isNews);
+---
+
+<BaseLayout title="Новини" description="Кратко за новостите в AI, които следя, с моето мнение.">
+  <header class="page-head">
+    <h1>Новини</h1>
+    <p>Кратко за новостите в AI, които следя, с моето мнение.</p>
+  </header>
+
+  {news.length > 0 ? <PostList posts={news} /> : <p class="empty">Още няма новини.</p>}
+</BaseLayout>

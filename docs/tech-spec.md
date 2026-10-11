@@ -21,6 +21,7 @@ Why it exists in this form is recorded in the SciScend workspace,
 | Posts in Bulgarian or English at `/blog/<slug>/`; R&D texts under `/blog/research/` | `hreflang` pairs (added with the first translated post) |
 | The coming-soon placeholder at `/` and the nginx config | |
 | The "Building SciScend with AI" series under `/blog/building-sciscend/` (drafts; moved from the workspace 2026-10-09) | |
+| The News section: short news items under `/blog/novini/`, listed at `/blog/novini/` and in the main list with a "новина" badge (added 2026-10-11) | |
 
 ## 2. Requirements
 
@@ -71,7 +72,8 @@ sciscend-blog/
 │   ├── styles/global.css
 │   └── pages/
 │       ├── index.astro         /blog/
-│       ├── [...slug].astro     /blog/<slug>/  and  /blog/research/<slug>/
+│       ├── [...slug].astro     /blog/<slug>/  and  /blog/<folder>/<slug>/
+│       ├── novini/index.astro  /blog/novini/         the news items only
 │       ├── tag/index.astro     /blog/tag/            all tags with counts
 │       ├── tag/[tag].astro     /blog/tag/<tag>/
 │       ├── rss.xml.ts          /blog/rss.xml
@@ -79,6 +81,7 @@ sciscend-blog/
 │       └── 404.astro           /blog/404.html
 ├── public/                     logo, favicons, default share image, post images
 ├── scripts/tags.mjs            `npm run tags` — tags in use with counts
+├── scripts/check-news.mjs      `npm run check:news` — news format check, run before every build
 ├── deploy/
 │   ├── deploy.sh               `npm run deploy`
 │   ├── deploy-placeholder.sh   `npm run deploy:placeholder`
@@ -99,6 +102,7 @@ One Markdown/MDX file per post in `src/content/blog/`. The path is the URL:
 | `src/content/blog/jev-na-balgarski.md` | `/blog/jev-na-balgarski/` |
 | `src/content/blog/research/foo.md` | `/blog/research/foo/` |
 | `src/content/blog/building-sciscend/foo.md` | `/blog/building-sciscend/foo/` |
+| `src/content/blog/novini/foo.md` | `/blog/novini/foo/` (a news item) |
 
 Slugs are Latin, kebab-case, transliterated, without a date, 2-5 words and at
 most 40 characters, specific about the topic; the full rule is in the
@@ -118,6 +122,17 @@ Frontmatter (validated by `src/content.config.ts`; a violation fails the build):
 | `heroImage` | string | no | path relative to `public/`; falls back to `og-default.png` |
 | `transcript` | string | no | workspace path of the redacted session transcript the post came from (series posts); never rendered |
 | `draft` | boolean | no, default `false` | drafts render in `npm run dev` only |
+
+### News items
+
+A post in `src/content/blog/novini/` is a news item; there is no frontmatter field
+for it (`isNews()` in `lib/posts.ts` checks the folder). News items appear in the
+main list with a "новина" badge, and alone on `/blog/novini/` (menu: Новини).
+Their format (100-300 words, no sections, source linked in the text, no hashtags
+or LinkedIn leftovers, 2-4 tags, description 120-160 characters) is checked by
+`scripts/check-news.mjs`, which `npm run build` runs first: a published item that
+breaks it fails the build, a draft gets warnings. The rules are in the
+`/blog-post` skill, "News format".
 
 ### Tags = categories
 
@@ -203,7 +218,7 @@ the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
 `/blog-post` (`.claude/skills/blog-post/SKILL.md`):
 
 1. **Draft** from Iva's topic and notes, after asking for the language (`bg` or
-   `en`) and the placement (root, `research/` or `building-sciscend/`) ->
+   `en`) and the placement (root, `research/`, `novini/` or `building-sciscend/`) ->
    `src/content/blog/<path>.md`, `draft: true`, tags reused via `npm run tags`.
    Series posts are drafted instead by `/blogworthy` in the SciScend workspace,
    from a real session, into `building-sciscend/`; from step 2 on they follow the
