@@ -8,10 +8,10 @@ import { getPosts, isNews } from '../../lib/posts.ts';
 const news = (await getPosts()).filter(isNews);
 ---
 
-<BaseLayout title="Новини" description="Кратко за новостите в AI, които следя, с моето мнение.">
+<BaseLayout title="Новини" description="Накратко за новостите в AI, които следя. И моето мнение.">
   <header class="page-head">
     <h1>Новини</h1>
-    <p>Кратко за новостите в AI, които следя, с моето мнение.</p>
+    <p>Накратко за новостите в AI, които следя. И моето мнение.</p>
   </header>
 
   {news.length > 0 ? <PostList posts={news} /> : <p class="empty">Още няма новини.</p>}
