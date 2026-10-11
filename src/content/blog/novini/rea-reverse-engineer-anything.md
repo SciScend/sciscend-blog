@@ -5,6 +5,7 @@ pubDate: 2026-10-11
 lang: bg
 tags: [ai-agents, claude-code, reverse-engineering, mcp]
 heroImage: images/rea-reverse-engineer-anything/illustration.png
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:activity:7515041892867321856/
 draft: false
 ---
 

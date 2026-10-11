@@ -134,4 +134,7 @@ Stop here. Iva edits the text herself.
    returns 200, and the post appears in `https://sciscend.com/blog/rss.xml`.
 4. Commit (`Publish: <title>`) and push.
 5. Tell Iva the LinkedIn announcement is `/linkedin-post from-blog <path>` in the
-   SciScend workspace.
+   SciScend workspace. Once a LinkedIn post for it is live, link the two both
+   ways: `linkedin_url: <LinkedIn post URL>` in the blog post's frontmatter, and
+   `blog_url: https://sciscend.com/blog/<path>/` (plus `url:`) in the LinkedIn
+   file. Commit and push both repos.

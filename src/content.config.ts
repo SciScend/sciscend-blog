@@ -35,6 +35,11 @@ const blog = defineCollection({
      * A record for Iva; never rendered or published.
      */
     transcript: z.string().optional(),
+    /**
+     * URL of the LinkedIn post that announces this post. The LinkedIn file in
+     * the SciScend workspace points back with `blog_url:`. Never rendered.
+     */
+    linkedin_url: z.string().url().optional(),
     /** Drafts are visible in `npm run dev`, never in a production build. */
     draft: z.boolean().default(false),
   }),

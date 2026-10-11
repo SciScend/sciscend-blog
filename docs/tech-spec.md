@@ -121,6 +121,7 @@ Frontmatter (validated by `src/content.config.ts`; a violation fails the build):
 | `tags` | string[] | no | lowercase kebab-case (`/^[a-z0-9]+(-[a-z0-9]+)*$/`), English |
 | `heroImage` | string | no | path relative to `public/`; falls back to `og-default.png` |
 | `transcript` | string | no | workspace path of the redacted session transcript the post came from (series posts); never rendered |
+| `linkedin_url` | URL | no | the LinkedIn post announcing it; the workspace LinkedIn file links back with `blog_url:`; never rendered |
 | `draft` | boolean | no, default `false` | drafts render in `npm run dev` only |
 
 ### News items
@@ -230,7 +231,8 @@ the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
    verify 200 + RSS -> commit and push.
 5. **LinkedIn**: `/linkedin-post from-blog <path>` in the SciScend workspace
    writes the announcement into `marketing/social/linkedin/`, after asking for its
-   language and channel.
+   language and channel. Once it is live, the two link each other: `linkedin_url:`
+   in the blog post, `blog_url:` (and `url:`) in the LinkedIn file.
 
 ## 11. Verification (2026-09-22)
 
