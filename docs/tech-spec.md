@@ -21,7 +21,7 @@ Why it exists in this form is recorded in the SciScend workspace,
 | Posts in Bulgarian or English at `/blog/<slug>/`; R&D texts under `/blog/research/` | `hreflang` pairs (added with the first translated post) |
 | The coming-soon placeholder at `/` and the nginx config | |
 | The "Building SciScend with AI" series under `/blog/building-sciscend/` (drafts; moved from the workspace 2026-10-09) | |
-| The News section: short news items under `/blog/novini/`, listed at `/blog/novini/` and in the main list with a "новина" badge (added 2026-10-11) | |
+| The News section: short news items under `/blog/novini/`, listed at `/blog/novini/` and in the main list with a "новини" badge (added 2026-10-11) | |
 
 ## 2. Requirements
 
@@ -127,7 +127,7 @@ Frontmatter (validated by `src/content.config.ts`; a violation fails the build):
 
 A post in `src/content/blog/novini/` is a news item; there is no frontmatter field
 for it (`isNews()` in `lib/posts.ts` checks the folder). News items appear in the
-main list with a "новина" badge, and alone on `/blog/novini/` (menu: Новини).
+main list with a "новини" badge, and alone on `/blog/novini/` (menu: Новини).
 Their format (100-300 words, no sections, source linked in the text, no hashtags
 or LinkedIn leftovers, 2-4 tags, description 120-160 characters) is checked by
 `scripts/check-news.mjs`, which `npm run build` runs first: a published item that

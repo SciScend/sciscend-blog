@@ -37,7 +37,7 @@ const minutes = readingMinutes(post.body);
       <p class="lede">{d.description}</p>
       <div class="meta" lang="bg">
         <time datetime={d.pubDate.toISOString()}>{formatDate(d.pubDate)}</time>
-        {isNews(post) && <a class="news-badge" href={url('novini')}>новина</a>}
+        {isNews(post) && <a class="news-badge" href={url('novini')}>новини</a>}
         {d.updatedDate && <span>обновена {formatDate(d.updatedDate)}</span>}
         <span>{minutes} мин. четене</span>
         {d.draft && <span class="draft-badge">чернова</span>}

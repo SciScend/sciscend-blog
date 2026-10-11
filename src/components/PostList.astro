@@ -15,7 +15,7 @@ const { posts } = Astro.props;
         <div class="meta">
           <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
           {post.data.lang === 'en' && <span> · English</span>}
-          {isNews(post) && <span class="news-badge">новина</span>}
+          {isNews(post) && <span class="news-badge">новини</span>}
           {post.data.draft && <span class="draft-badge">чернова</span>}
         </div>
         <h2>
