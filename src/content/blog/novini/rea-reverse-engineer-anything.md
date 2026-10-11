@@ -5,7 +5,7 @@ pubDate: 2026-10-11
 lang: bg
 tags: [ai-agents, claude-code, reverse-engineering, mcp]
 heroImage: images/rea-reverse-engineer-anything/illustration.png
-draft: true
+draft: false
 ---
 
 Agentic инструментите превърнаха 2026-та в годината на "Вече всеки е програмист". 2027-ма може да се окаже годината на "Вече всеки е хакер".
