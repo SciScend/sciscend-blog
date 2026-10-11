@@ -4,6 +4,7 @@ description: 'Jev е първият System One модел: вместо текс
 pubDate: 2026-09-25
 lang: bg
 tags: [system-one-models, jev, llm]
+linkedin_url: https://www.linkedin.com/feed/update/urn:li:activity:7509264311832186880/
 draft: false
 ---
 
