@@ -16,7 +16,7 @@ export const SITE = {
   name: 'SciScend',
   title: 'Блогът на SciScend',
   description:
-    'Практичен AI, ML и Python на български: тестове на нови модели, ръководства за начинаещи и AI за малкия бизнес.',
+    'Практичен AI и ML на български: новини, тестове на нови модели, ръководства за начинаещи и AI за малкия бизнес.',
 
   /** UI language of the blog. Each post also declares its own `lang`. */
   lang: 'bg',
