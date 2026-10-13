@@ -94,7 +94,8 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  flex-wrap: wrap; /* on a narrow phone the nav drops below the brand */
+  gap: 0.5rem 1rem;
   padding-block: 0.9rem;
 }
 .brand {
@@ -120,12 +121,13 @@ a:hover {
 }
 .site-nav {
   display: flex;
-  gap: 1.1rem;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
   font-size: 0.95rem;
 }
 @media (max-width: 30rem) {
   .site-nav {
-    gap: 0.75rem;
+    gap: 0.4rem 0.75rem;
     font-size: 0.9rem;
   }
   .brand img {
