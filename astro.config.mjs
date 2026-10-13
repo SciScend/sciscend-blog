@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
+import externalLinks from './src/lib/external-links.mjs';
+
 import { SITE } from './src/site.config.ts';
 
 // Static output, served under https://sciscend.com/blog/. Built on the laptop and
@@ -20,5 +22,6 @@ export default defineConfig({
   markdown: {
     shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
   },
-  integrations: [mdx(), sitemap()],
+  // externalLinks: off-site links open in a new tab (rewrites the built HTML).
+  integrations: [mdx(), sitemap(), externalLinks()],
 });
