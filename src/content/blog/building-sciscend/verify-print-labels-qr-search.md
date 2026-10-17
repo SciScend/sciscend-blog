@@ -4,7 +4,7 @@ description: 'I asked an agent whether a feature it had built actually works. Th
 pubDate: 2026-09-17
 lang: en
 tags: [building-in-public, ai-agents, claude-code, verification, pwa, capacitor]
-transcript: ai/sessions/published/2026-09-17-verify-print-labels-qr-search.md
+transcript: .ai/sessions/published/2026-09-17-verify-print-labels-qr-search.md
 draft: true
 ---
 
@@ -36,7 +36,7 @@ of the feature, not a new one.
 ## How the AI setup worked
 
 I use a `/session` command for tasks like this. It opens VSCode, I write the
-prompt there, and closing the tab files the prompt under `ai/prompts/` along
+prompt there, and closing the tab files the prompt under `.ai/prompts/` along
 with a link to the live session, so I can follow along from my phone. When the
 work ends, the outcome is written back into the same file:
 

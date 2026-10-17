@@ -31,7 +31,7 @@ const blog = defineCollection({
     heroImage: z.string().optional(),
     /**
      * Path of the redacted session transcript the post came from, in the
-     * SciScend workspace (e.g. "ai/sessions/published/2026-07-28-x.md").
+     * SciScend workspace (e.g. ".ai/sessions/published/2026-07-28-x.md").
      * A record for Iva; never rendered or published.
      */
     transcript: z.string().optional(),

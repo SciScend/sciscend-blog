@@ -4,7 +4,7 @@ description: 'I asked an AI to audit the session-archiving workflow I had design
 pubDate: 2026-07-25
 lang: en
 tags: [building-in-public, ai-agents, claude-code, tooling, solo-founder]
-transcript: ai/sessions/published/2026-07-25-review-session-archiving-process.md
+transcript: .ai/sessions/published/2026-07-25-review-session-archiving-process.md
 draft: true
 ---
 

@@ -79,7 +79,7 @@ platform.
 package — no lawyer, no intermediary, 55 лв. in state fees.*
 
 <!-- DRAFT NOTES (remove before publishing):
-Source prompts in the SciScend workspace: ai/prompts/2026-03-15-company-naming-pipeline/
+Source prompts in the SciScend workspace: .ai/prompts/2026-03-15-company-naming-pipeline/
 - Decide blog language strategy (EN vs EN+BG) before first publish.
 - Add 1-2 screenshots: scoring table from naming-brainstorm, evaluation table HTML.
 - Verify: OK to show real candidate names that were rejected? (they're public in repo anyway if repo goes public — decide repo visibility first)

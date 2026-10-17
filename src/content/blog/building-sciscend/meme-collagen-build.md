@@ -4,7 +4,7 @@ description: 'Three sentences built the app. Eight more words, ''make sure it wo
 pubDate: 2026-07-28
 lang: en
 tags: [building-in-public, ai-agents, claude-code, testing, vanilla-js]
-transcript: ai/sessions/published/2026-07-28-meme-collagen-build.md
+transcript: .ai/sessions/published/2026-07-28-meme-collagen-build.md
 draft: true
 ---
 
