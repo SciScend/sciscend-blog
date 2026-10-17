@@ -28,10 +28,11 @@ npm run deploy               # blog
 npm run deploy:placeholder   # coming-soon page + root robots.txt
 ```
 
-Verify against the origin, bypassing Cloudflare:
+Verify against the origin, bypassing Cloudflare. The firewall only lets
+Cloudflare reach ports 80/443, so run the check on the server itself:
 
 ```bash
-curl -sSI --resolve sciscend.com:443:<VPS-IP> https://sciscend.com/blog/
+ssh bulinfo 'curl -sSI --resolve sciscend.com:443:127.0.0.1 https://sciscend.com/blog/'
 ```
 
 If a change doesn't show publicly, purge the Cloudflare cache
@@ -62,6 +63,7 @@ fails, copy the backup back.
 | nginx site | `/etc/nginx/sites-available/sciscend.com` |
 | TLS | Let's Encrypt, cert `sciscend.com` (apex + `www`), certbot systemd timer |
 | DNS | Cloudflare, proxied |
+| Firewall | ufw: SSH open (keys only); 80/443 only from Cloudflare's IP ranges. Runbook in the workspace's `operations/hosting-and-deployment.md` |
 
 Rebuilding the server from scratch is documented in the workspace:
 `operations/hosting-and-deployment.md`.
