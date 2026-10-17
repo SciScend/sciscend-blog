@@ -82,6 +82,7 @@ sciscend-blog/
 ├── public/                     logo, favicons, default share image, post images
 ├── scripts/tags.mjs            `npm run tags` — tags in use with counts
 ├── scripts/check-news.mjs      `npm run check:news` — news format check, run before every build
+├── scripts/make_diagrams.py    SVG diagrams for the System One / Jev series (python3; see its docstring)
 ├── deploy/
 │   ├── deploy.sh               `npm run deploy`
 │   ├── deploy-placeholder.sh   `npm run deploy:placeholder`
