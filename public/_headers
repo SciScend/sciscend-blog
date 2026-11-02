@@ -1,0 +1,51 @@
+# Response headers for the sciscend-blog Worker (Cloudflare Workers static assets).
+# Carries over the /blog/ part of deploy/nginx-sciscend.conf. Paths are the public
+# ones, with /blog in front. Every matching rule adds its headers;
+# the same header from two rules is joined with a comma. Only an image or font
+# under _astro/ matches two Cache-Control rules; the _astro rule drops the other
+# one with "! Cache-Control" (tested on workers.dev).
+# HTML gets the Workers default Cache-Control: public, max-age=0, must-revalidate
+# (same as nginx), so it has no rule here.
+
+/blog/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Hashed build assets: 1 year, immutable.
+/blog/_astro/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images and fonts: 30 days.
+/blog/*.png
+  Cache-Control: public, max-age=2592000
+/blog/*.jpg
+  Cache-Control: public, max-age=2592000
+/blog/*.jpeg
+  Cache-Control: public, max-age=2592000
+/blog/*.gif
+  Cache-Control: public, max-age=2592000
+/blog/*.webp
+  Cache-Control: public, max-age=2592000
+/blog/*.avif
+  Cache-Control: public, max-age=2592000
+/blog/*.svg
+  Cache-Control: public, max-age=2592000
+/blog/*.ico
+  Cache-Control: public, max-age=2592000
+/blog/*.woff
+  Cache-Control: public, max-age=2592000
+/blog/*.woff2
+  Cache-Control: public, max-age=2592000
+
+# SEO and agent files: 1 hour, and the content types nginx sent. Workers sends
+# llms.txt as text/plain without a charset (the Cyrillic text would be decoded
+# wrongly) and rss.xml as application/xml.
+/blog/llms.txt
+  Cache-Control: public, max-age=3600
+  Content-Type: text/plain; charset=utf-8
+
+/blog/rss.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/rss+xml; charset=utf-8

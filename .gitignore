@@ -1,5 +1,6 @@
 # build output
 dist/
+dist-cf/
 # astro generated types + cache
 .astro/
 # deps
@@ -13,3 +14,4 @@ node_modules/
 npm-debug.log*
 # local deploy settings (host alias, paths)
 deploy/deploy.env
+.wrangler/

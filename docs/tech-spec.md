@@ -79,7 +79,7 @@ sciscend-blog/
 │       ├── rss.xml.ts          /blog/rss.xml
 │       ├── llms.txt.ts         /blog/llms.txt
 │       └── 404.astro           /blog/404.html
-├── public/                     logo, favicons, default share image, post images
+├── public/                     logo, favicons, default share image, post images, _headers (Cloudflare)
 ├── scripts/tags.mjs            `npm run tags` — tags in use with counts
 ├── scripts/check-news.mjs      `npm run check:news` — news format check, run before every build
 ├── scripts/make_diagrams.py    SVG diagrams for the System One / Jev series (python3; see its docstring)
@@ -87,9 +87,14 @@ sciscend-blog/
 │   ├── deploy.sh               `npm run deploy`
 │   ├── deploy-placeholder.sh   `npm run deploy:placeholder`
 │   ├── deploy.env.example      copy to deploy.env (gitignored)
+│   ├── deploy-cf.sh            `npm run deploy:cf` (Cloudflare Worker sciscend-blog)
+│   ├── deploy-cf-placeholder.sh `npm run deploy:cf:placeholder` (Worker sciscend-home)
+│   ├── cloudflare-env.sh       loads the Cloudflare credentials for the two above
 │   ├── nginx-sciscend.conf     the live nginx site config — source of truth
-│   ├── placeholder/            the coming-soon page + root robots.txt
+│   ├── placeholder/            the coming-soon page + root robots.txt, _headers, _redirects
 │   └── README.md               runbook
+├── wrangler.jsonc              Cloudflare Worker sciscend-blog
+├── wrangler.home.jsonc         Cloudflare Worker sciscend-home (the placeholder)
 ├── .claude/skills/blog-post/   /blog-post — draft, check, publish
 └── docs/tech-spec.md           this file
 ```
@@ -214,6 +219,15 @@ Both scripts read `deploy/deploy.env` (gitignored; the `bulinfo` SSH alias holds
 host, user and key) and refuse to run if the target path does not end in `/blog`
 or `/html` respectively. nginx changes: edit `deploy/nginx-sciscend.conf`, then
 the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
+
+**Cloudflare Workers (migration in progress, decision 021 in the workspace).**
+Two Workers carry the same trees: `sciscend-blog` (`wrangler.jsonc`,
+`npm run deploy:cf`) and `sciscend-home` (`wrangler.home.jsonc`,
+`npm run deploy:cf:placeholder`). Until the cut-over they have no routes and run
+on workers.dev only; the live site is still the VPS. `public/_headers`,
+`deploy/placeholder/_headers` and `deploy/placeholder/_redirects` carry over the
+nginx rules above; the rsync scripts skip those files. Details, the checks and the
+`base_path` workaround: `deploy/README.md`.
 
 ## 10. Publishing workflow
 

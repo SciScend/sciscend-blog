@@ -1,0 +1,8 @@
+# Redirects for the sciscend-home Worker (Cloudflare Workers static assets).
+# These paths have no trailing slash, so they fall outside the routes of the blog
+# (sciscend.com/blog/*) and portfolio (sciscend.com/ivapopova/*) Workers and reach
+# this one. Same 301s as deploy/nginx-sciscend.conf.
+/blog                /blog/                301
+/ivapopova           /ivapopova/           301
+/ivapopova/projects  /ivapopova/projects/  301
+/ivapopova/cv        /ivapopova/cv/        301

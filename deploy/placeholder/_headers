@@ -1,0 +1,46 @@
+# Response headers for the sciscend-home Worker (the placeholder at /).
+# Carries over the server-level part of deploy/nginx-sciscend.conf. Every matching
+# rule adds its headers; the same header from two rules is joined with a comma.
+# Only an image or font under _astro/ matches two Cache-Control rules; the _astro
+# rule drops the other one with "! Cache-Control" (tested on workers.dev).
+# HTML gets the Workers default Cache-Control: public, max-age=0, must-revalidate
+# (same as nginx), so it has no rule here.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Hashed build assets (for the launch site that replaces the placeholder): 1 year.
+/_astro/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images and fonts: 30 days.
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.jpg
+  Cache-Control: public, max-age=2592000
+/*.jpeg
+  Cache-Control: public, max-age=2592000
+/*.gif
+  Cache-Control: public, max-age=2592000
+/*.webp
+  Cache-Control: public, max-age=2592000
+/*.avif
+  Cache-Control: public, max-age=2592000
+/*.svg
+  Cache-Control: public, max-age=2592000
+/*.ico
+  Cache-Control: public, max-age=2592000
+/*.woff
+  Cache-Control: public, max-age=2592000
+/*.woff2
+  Cache-Control: public, max-age=2592000
+
+# SEO and agent files: 1 hour.
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+/llms.txt
+  Cache-Control: public, max-age=3600
