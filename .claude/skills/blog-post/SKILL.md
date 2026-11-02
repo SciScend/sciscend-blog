@@ -86,7 +86,7 @@ posts live.
 
 A news item is a short take on something new in AI: what happened, then what Iva
 thinks of it. It can start anywhere: from scratch here, or from one of her
-LinkedIn posts in `/data/projects/SciScend/marketing/social/linkedin/` (copy her
+LinkedIn posts in `/data/projects/sciscend/marketing/social/linkedin/` (copy her
 text as is), and a LinkedIn post can also follow it. Whichever comes first, the
 blog version looks the same:
 
@@ -110,9 +110,9 @@ item exist for the same news, set `blog_url:` in the LinkedIn file's front matte
 1. `npm run build` must pass (the schema validates the frontmatter; for a news
    item, `check-news.mjs` validates the format).
 2. **Private data.** The post is about to become public:
-   - `/data/projects/SciScend/bin/redact-private-data.py <file> --dry-run`
+   - `/data/projects/sciscend/bin/redact-private-data.py <file> --dry-run`
    - then do the reading pass described in
-     `/data/projects/SciScend/.claude/skills/check-private-data/SKILL.md`
+     `/data/projects/sciscend/.claude/skills/check-private-data/SKILL.md`
      (named third parties, clients, figures, infrastructure details such as
      server IPs or paths, unreleased plans). Report findings; change only what
      Iva approves.

@@ -2,7 +2,7 @@
 
 The blog at https://sciscend.com/blog/. Read `docs/tech-spec.md` before changing
 structure, URLs, the schema, nginx or deploy. Company facts live in the SciScend
-workspace (`/data/projects/SciScend`), not here.
+workspace (`/data/projects/sciscend`), not here.
 
 ## Rules
 
