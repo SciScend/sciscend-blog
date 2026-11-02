@@ -1,7 +1,7 @@
 # sciscend-blog
 
 The blog at https://sciscend.com/blog/. Read `docs/tech-spec.md` before changing
-structure, URLs, the schema, nginx or deploy. Company facts live in the SciScend
+structure, URLs, the schema, headers, redirects or deploy. Company facts live in the SciScend
 workspace (`/data/projects/sciscend`), not here.
 
 ## Rules
@@ -16,13 +16,13 @@ workspace (`/data/projects/sciscend`), not here.
   (pipeline, prompt, fine-tuning - no literal translations).
 - **Tags**: run `npm run tags` and reuse; lowercase kebab-case, English.
 - **Slugs and tag names are permanent URLs.** Don't rename a published one
-  without adding an nginx 301 in `deploy/nginx-sciscend.conf`.
+  without adding a 301 in `public/_redirects` (see `deploy/README.md`).
 - **Public wording**: "SciScend", never "SciScend ЕООД". Never "д-р", "PhD" or
   "доктор" for Iva — the approved author text is in `src/site.config.ts`.
 - **Private data**: every post passes the workspace's
   `bin/redact-private-data.py --dry-run` and the `check-private-data` reading pass
   before publishing. No server IPs, paths or account details in posts.
-- **Deploy** only with `npm run deploy` / `npm run deploy:placeholder`. Never build
-  on the VPS. `deploy/nginx-sciscend.conf` is the live nginx config — edit here,
-  then follow `deploy/README.md`.
+- **Deploy** only with `npm run deploy` / `npm run deploy:placeholder` (Cloudflare
+  Workers `sciscend-blog` and `sciscend-home`, `deploy/README.md`). Headers live in
+  `public/_headers` and `deploy/placeholder/_headers`, redirects in `_redirects`.
 - After a finished task: commit with a short message and push.

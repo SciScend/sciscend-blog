@@ -1,14 +1,16 @@
 // Cloudflare Worker for the coming-soon placeholder at https://sciscend.com/.
-// Static assets only, no Worker code. Deploy: `npm run deploy:cf:placeholder`.
+// Static assets only, no Worker code. Deploy: `npm run deploy:placeholder`.
 // Kept in the repo root (not in deploy/placeholder/) so the config itself is never
-// uploaded or rsynced as a public file.
-// No `routes` yet: phase 2 runs on workers.dev only. The route `sciscend.com/*`
-// is added in phase 3, last, because it catches every path without its own Worker.
+// uploaded as a public file.
+// Live on the route sciscend.com/* since 2026-11-03 (phase 3). It catches every
+// path without a more specific route (/blog/*, /ivapopova/*); deploy it last
+// when routes change. workers.dev is off.
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "sciscend-home",
   "compatibility_date": "2026-11-01",
-  "workers_dev": true,
+  "workers_dev": false,
+  "routes": [{ "pattern": "sciscend.com/*", "zone_name": "sciscend.com" }],
   // No Version or Preview URLs: deploys go straight from the laptop, and each
   // would be one more public copy of the site (sciscend operations/cloudflare-workers-review.md).
   "preview_urls": false,

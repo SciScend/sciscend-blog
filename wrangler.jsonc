@@ -1,11 +1,11 @@
 // Cloudflare Worker for the blog: serves the build under https://sciscend.com/blog/.
-// Static assets only, no Worker code. Deploy: `npm run deploy:cf` (see deploy/README.md).
-// No `routes` yet: phase 2 of the migration runs on workers.dev only. Adding the
-// route `sciscend.com/blog/*` is phase 3 (workspace: operations/cloudflare-workers-migration.md).
+// Static assets only, no Worker code. Deploy: `npm run deploy` (see deploy/README.md).
+// Live on the route sciscend.com/blog/* since 2026-11-03 (migration phase 3,
+// workspace: operations/cloudflare-workers-migration.md). workers.dev is off.
 //
 // Why not `"directory": "./dist", "base_path": "/blog"`: on 2026-11-03 Cloudflare
 // refused it for this account ("A non-root assets.base_path is not enabled for
-// this account. [code: 100343]"). deploy/deploy-cf.sh therefore copies dist/ into
+// this account. [code: 100343]"). deploy/deploy.sh therefore copies dist/ into
 // dist-cf/blog/ and moves _headers to dist-cf/, so the asset paths already carry
 // /blog. Once base_path is enabled, switch to directory ./dist + base_path /blog
 // and drop the staging step; _headers stays the same (it uses public paths).
@@ -13,7 +13,8 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "sciscend-blog",
   "compatibility_date": "2026-11-01",
-  "workers_dev": true,
+  "workers_dev": false,
+  "routes": [{ "pattern": "sciscend.com/blog/*", "zone_name": "sciscend.com" }],
   // No Version or Preview URLs: deploys go straight from the laptop, and each
   // would be one more public copy of the site (sciscend operations/cloudflare-workers-review.md).
   "preview_urls": false,

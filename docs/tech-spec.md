@@ -19,7 +19,7 @@ Why it exists in this form is recorded in the SciScend workspace,
 | Article list, article pages, tag (category) pages | The company website — `sciscend-web` is on hold and will be redone |
 | RSS, sitemap, `llms.txt`, JSON-LD, Open Graph | Comments, newsletter, search, analytics |
 | Posts in Bulgarian or English at `/blog/<slug>/`; R&D texts under `/blog/research/` | `hreflang` pairs (added with the first translated post) |
-| The coming-soon placeholder at `/` and the nginx config | |
+| The coming-soon placeholder at `/` and the Cloudflare Worker configs | |
 | The "Building SciScend with AI" series under `/blog/building-sciscend/` (drafts; moved from the workspace 2026-10-09) | |
 | The News section: short news items under `/blog/novini/`, listed at `/blog/novini/` and in the main list with a "новини" badge (added 2026-10-11) | |
 
@@ -37,7 +37,8 @@ Why it exists in this form is recorded in the SciScend workspace,
    approved by Iva) — never generated at build time, so category URLs are stable.
 5. **Drafts** never reach production.
 6. **Minimal design** in the brand colours, readable on a phone, light and dark.
-7. **Static only.** The 1 GB VPS serves files; it never builds and runs no Node.
+7. **Static only.** Cloudflare Workers serve the files (static assets, no Worker
+   code); builds happen on the laptop.
 
 ## 3. Stack
 
@@ -48,13 +49,13 @@ Why it exists in this form is recorded in the SciScend workspace,
 | Styling | one hand-written stylesheet, `src/styles/global.css` — no framework |
 | Fonts | system font stack (Cyrillic-complete, zero requests) |
 | Code highlighting | Shiki, dual theme (`github-light` / `github-dark`) |
-| Hosting | Bullinfo VPS, nginx 1.24, behind Cloudflare (proxied) |
+| Hosting | Cloudflare Workers static assets (`sciscend-blog`, `sciscend-home`), since 2026-11-03; before that the Bullinfo VPS with nginx |
 | Repo | `github.com/SciScend/sciscend-blog` (private), local `/data/projects/sciscend-blog` |
 
 Key `astro.config.mjs` settings: `site: 'https://sciscend.com'`, `base: '/blog'`,
 `trailingSlash: 'always'`, `build.format: 'directory'`. The build output in `dist/`
 is *unprefixed* (`dist/index.html`, `dist/tag/…`); the prefix comes from where it
-is deployed (`/var/www/sciscend.com/blog/`).
+is deployed (`deploy/deploy.sh` stages it as `dist-cf/blog/`).
 
 ## 4. Repository layout
 
@@ -84,13 +85,9 @@ sciscend-blog/
 ├── scripts/check-news.mjs      `npm run check:news` — news format check, run before every build
 ├── scripts/make_diagrams.py    SVG diagrams for the System One / Jev series (python3; see its docstring)
 ├── deploy/
-│   ├── deploy.sh               `npm run deploy`
-│   ├── deploy-placeholder.sh   `npm run deploy:placeholder`
-│   ├── deploy.env.example      copy to deploy.env (gitignored)
-│   ├── deploy-cf.sh            `npm run deploy:cf` (Cloudflare Worker sciscend-blog)
-│   ├── deploy-cf-placeholder.sh `npm run deploy:cf:placeholder` (Worker sciscend-home)
+│   ├── deploy.sh               `npm run deploy` (Cloudflare Worker sciscend-blog)
+│   ├── deploy-placeholder.sh   `npm run deploy:placeholder` (Worker sciscend-home)
 │   ├── cloudflare-env.sh       loads the Cloudflare credentials for the two above
-│   ├── nginx-sciscend.conf     the live nginx site config — source of truth
 │   ├── placeholder/            the coming-soon page + root robots.txt, _headers, _redirects
 │   └── README.md               runbook
 ├── wrangler.jsonc              Cloudflare Worker sciscend-blog
@@ -150,7 +147,7 @@ breaks it fails the build, a draft gets warnings. The rules are in the
   the schema rejects anything that is not lowercase kebab-case, so `LLMs`/`llm`
   cannot coexist.
 - Merging two tags later = edit the posts' frontmatter; the old tag page
-  disappears. If the old tag page had traffic, add an nginx 301.
+  disappears. If the old tag page had traffic, add a 301 in `public/_redirects`.
 
 ## 6. SEO and agent-readability
 
@@ -182,52 +179,43 @@ in the workspace's `company/iva-popova-bio-short.md` — never "д-р" or "PhD".
 
 ## 8. Serving
 
-On the VPS:
+Three Cloudflare Workers with static assets only (no code) serve sciscend.com
+since 2026-11-03 (workspace: decision 021):
 
-```
-/var/www/sciscend.com/
-├── html/   ← the placeholder   (deploy/placeholder/, npm run deploy:placeholder)
-└── blog/   ← the blog           (dist/,               npm run deploy)
-```
+| Route | Worker | From |
+|---|---|---|
+| `sciscend.com/blog/*` | `sciscend-blog` | this repo, `dist/` staged as `dist-cf/blog/` |
+| `sciscend.com/ivapopova/*` | `sciscend-portfolio` | the workspace, `bin/build-portfolio.py` |
+| `sciscend.com/*` | `sciscend-home` | this repo, `deploy/placeholder/` |
 
-`html/` and `blog/` are siblings, so each `rsync --delete` mirrors only its own
-tree. nginx (`deploy/nginx-sciscend.conf`):
+The most specific route wins. Each Worker is deployed on its own, so a blog
+deploy never touches the placeholder and the other way round.
 
-- `location = /blog` → 301 to `/blog/`.
-- `location ^~ /blog/` with `root /var/www/sciscend.com`,
-  `try_files $uri $uri/index.html =404`, `error_page 404 /blog/404.html`,
-  `charset utf-8`, HTML `must-revalidate`, security headers.
-- **`^~` is required**: without it the server-level image regex wins for
-  `/blog/*.png` and looks under `html/`. Asset caching for the blog is therefore
-  nested inside the block: `_astro/` 1 year immutable, images 30 days; exact
-  locations fix the MIME types of `rss.xml`, the sitemaps and `llms.txt`.
+- `html_handling: auto-trailing-slash`: `/blog/x` answers 307 to `/blog/x/`.
+- `not_found_handling: 404-page`: `/blog/404.html` with status 404.
+- `public/_headers`: security headers, HTML `charset=utf-8` and
+  `must-revalidate`, `_astro/` 1 year immutable, images and fonts 30 days, the
+  MIME types and 1-hour cache of `rss.xml` and `llms.txt`.
+- `/blog` -> `/blog/` (301) is in `deploy/placeholder/_redirects`: without the
+  slash the path is outside the blog route.
 - The root `robots.txt` (in `deploy/placeholder/`) allows everything and points to
   the blog sitemap.
 
-Cloudflare proxies the domain. Two Cloudflare settings affect the blog and are
-dashboard decisions (see §11): Email Address Obfuscation rewrites `mailto:` links,
-and managed `robots.txt` (not active as of 2026-09-22).
+Zone settings that affect the blog (see §11 and the workspace's
+`operations/hosting-and-deployment.md`): Email Address Obfuscation rewrites
+`mailto:` links; the AI crawler policies must stay on Allow so that Cloudflare
+does not prepend its managed block to `robots.txt` (it did until 2026-11-03).
 
 ## 9. Deploy
 
 ```bash
-npm run deploy              # build locally → rsync --delete dist/ → bulinfo:/var/www/sciscend.com/blog/
-npm run deploy:placeholder  # rsync --delete deploy/placeholder/ → bulinfo:/var/www/sciscend.com/html/
+npm run deploy              # build -> dist-cf/blog/ -> wrangler deploy (Worker sciscend-blog)
+npm run deploy:placeholder  # wrangler deploy deploy/placeholder/ (Worker sciscend-home)
 ```
 
-Both scripts read `deploy/deploy.env` (gitignored; the `bulinfo` SSH alias holds
-host, user and key) and refuse to run if the target path does not end in `/blog`
-or `/html` respectively. nginx changes: edit `deploy/nginx-sciscend.conf`, then
-the procedure in `deploy/README.md` (backup → `nginx -t` → reload).
-
-**Cloudflare Workers (migration in progress, decision 021 in the workspace).**
-Two Workers carry the same trees: `sciscend-blog` (`wrangler.jsonc`,
-`npm run deploy:cf`) and `sciscend-home` (`wrangler.home.jsonc`,
-`npm run deploy:cf:placeholder`). Until the cut-over they have no routes and run
-on workers.dev only; the live site is still the VPS. `public/_headers`,
-`deploy/placeholder/_headers` and `deploy/placeholder/_redirects` carry over the
-nginx rules above; the rsync scripts skip those files. Details, the checks and the
-`base_path` workaround: `deploy/README.md`.
+Credentials come from `deploy/cloudflare-env.sh` (default: the workspace's
+`.private/cloudflare.env`). Details, the checks, redirects and the `base_path`
+workaround: `deploy/README.md`.
 
 ## 10. Publishing workflow
 

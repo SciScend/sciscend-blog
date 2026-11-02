@@ -8,7 +8,7 @@ import externalLinks from './src/lib/external-links.mjs';
 import { SITE } from './src/site.config.ts';
 
 // Static output, served under https://sciscend.com/blog/. Built on the laptop and
-// rsync'd to the VPS (see deploy/README.md). `site` + `base` together make every
+// deployed to a Cloudflare Worker (see deploy/README.md). `site` + `base` together make every
 // canonical URL, the sitemap and RSS absolute and correctly prefixed.
 export default defineConfig({
   site: SITE.origin,
@@ -16,7 +16,7 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   build: {
-    // /blog/<slug>/index.html — clean URLs on nginx.
+    // /blog/<slug>/index.html — clean URLs (Workers html_handling).
     format: 'directory',
   },
   markdown: {

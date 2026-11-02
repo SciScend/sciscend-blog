@@ -1,4 +1,4 @@
-# Sourced by the deploy-cf*.sh scripts. Loads the Cloudflare credentials unless
+# Sourced by deploy/deploy.sh and deploy/deploy-placeholder.sh. Loads the Cloudflare credentials unless
 # they are already in the environment. Never echo the values.
 if [[ -z "${CLOUDFLARE_API_TOKEN:-}" || -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]]; then
   CLOUDFLARE_ENV_FILE="${CLOUDFLARE_ENV_FILE:-/data/projects/sciscend/.private/cloudflare.env}"

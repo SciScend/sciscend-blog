@@ -1,81 +1,78 @@
 # Deploying the SciScend blog
 
-The blog is static. It is built on the laptop and rsynced to the Bullinfo VPS; the
-VPS only serves files with nginx, never builds and runs no Node process.
+The blog and the coming-soon page at `/` are static. They are built on the
+laptop and uploaded with `wrangler deploy` to two Cloudflare Workers that serve
+static assets only, no code. Since 2026-11-03 they serve the live site
+(decision 021 in the workspace; migration plan:
+`operations/cloudflare-workers-migration.md`).
 
 ```
-laptop                                   Bullinfo VPS (nginx)
-──────                                   ─────────────────────────────────────
-npm run deploy             ──rsync──►   /var/www/sciscend.com/blog/   → sciscend.com/blog/
-npm run deploy:placeholder ──rsync──►   /var/www/sciscend.com/html/   → sciscend.com/
-                                                     ▲
-                              visitors ── Cloudflare ┘
+laptop                                        Cloudflare (zone sciscend.com)
+------                                        ------------------------------
+npm run deploy             --wrangler-->  Worker sciscend-blog   route sciscend.com/blog/*
+npm run deploy:placeholder --wrangler-->  Worker sciscend-home   route sciscend.com/*
+(workspace) bin/build-portfolio.py --deploy-cf  Worker sciscend-portfolio  route sciscend.com/ivapopova/*
 ```
 
-The two trees are siblings, so each `rsync --delete` mirrors only its own folder.
-Both scripts refuse to run unless the target ends in `/blog` or `/html`. They
-skip `_headers` and `_redirects`, which only the Cloudflare Workers read (see
-below).
+The most specific route wins, so `/blog/...` goes to the blog and everything
+without its own Worker goes to `sciscend-home`. Each deploy replaces only its own
+Worker.
 
-## One-time local setup
+| Worker | Config | Command | Assets |
+|---|---|---|---|
+| `sciscend-blog` | `wrangler.jsonc` | `npm run deploy` | `dist/`, staged as `dist-cf/blog/` |
+| `sciscend-home` | `wrangler.home.jsonc` | `npm run deploy:placeholder` | `deploy/placeholder/` |
 
-```bash
-cp deploy/deploy.env.example deploy/deploy.env   # uses the `bulinfo` SSH alias
-```
+`workers_dev` and `preview_urls` are off: the site exists only on sciscend.com.
+
+## Credentials
+
+The scripts need `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`. If they are
+not in the environment, `deploy/cloudflare-env.sh` loads them from
+`CLOUDFLARE_ENV_FILE` (default: the workspace's `.private/cloudflare.env`). The
+token (template "Edit Cloudflare Workers", account + zone sciscend.com) never
+goes into this repo. Check: `npx wrangler whoami` with the variables loaded.
 
 ## Every deploy
 
 ```bash
-npm run deploy               # blog
-npm run deploy:placeholder   # coming-soon page + root robots.txt
+npm run deploy               # build, stage dist-cf/, wrangler deploy (blog)
+npm run deploy:placeholder   # wrangler deploy (placeholder, nothing to build)
 ```
 
-Verify against the origin, bypassing Cloudflare. The firewall only lets
-Cloudflare reach ports 80/443, so run the check on the server itself:
+Check after a deploy:
 
 ```bash
-ssh bulinfo 'curl -sSI --resolve sciscend.com:443:127.0.0.1 https://sciscend.com/blog/'
+for p in /blog/ /blog/tag/ai-agents/ /blog/rss.xml /blog/sitemap-index.xml /blog/llms.txt /blog/no-such-page/; do
+  echo "== $p"; curl -sI "https://sciscend.com$p" | grep -iE '^(HTTP|content-type|cache-control|location)'
+done
 ```
 
-If a change doesn't show publicly, purge the Cloudflare cache
-(Caching → Configuration → Purge Everything). HTML is sent with
-`must-revalidate`, so this is rare.
+HTML is sent with `max-age=0, must-revalidate`, so a deploy shows at once. If it
+does not, purge the cache (dashboard -> sciscend.com -> Caching -> Configuration
+-> Purge Everything).
 
-## Cloudflare Workers (migration, phase 2)
+## Redirects (renamed slugs and tags)
 
-sciscend.com is moving from the VPS to Cloudflare Workers static assets before
-2026-11-12 (decision 021; plan in the workspace,
-`operations/cloudflare-workers-migration.md`). This repo has two Workers. For
-now they have **no routes**: they run on workers.dev only, and the live site is
-still the VPS above. The rsync scripts stay until the VPS is switched off.
+A renamed post or tag needs a 301 from the old URL. Put it in
+`public/_redirects` with the full public paths:
 
-| Worker | Config | Command | Assets | workers.dev |
-|---|---|---|---|---|
-| `sciscend-blog` | `wrangler.jsonc` | `npm run deploy:cf` | `dist/`, staged as `dist-cf/blog/` | <https://sciscend-blog.sciscend.workers.dev/blog/> |
-| `sciscend-home` | `wrangler.home.jsonc` | `npm run deploy:cf:placeholder` | `deploy/placeholder/` | <https://sciscend-home.sciscend.workers.dev/> |
-
-```bash
-npm run deploy:cf               # build, stage, wrangler deploy (blog)
-npm run deploy:cf:placeholder   # wrangler deploy (placeholder, nothing to build)
+```
+/blog/old-slug/   /blog/new-slug/   301
 ```
 
-**Credentials.** The scripts need `CLOUDFLARE_ACCOUNT_ID` and
-`CLOUDFLARE_API_TOKEN`. If they are not in the environment,
-`deploy/cloudflare-env.sh` loads them from `CLOUDFLARE_ENV_FILE` (default: the
-workspace's `.private/cloudflare.env`). The token never goes into this repo.
+`deploy/deploy.sh` moves the file to the assets root. Limit: 2,000 static
+redirects. `/blog` -> `/blog/` itself lives in `deploy/placeholder/_redirects`,
+because `/blog` without the slash is outside the blog route.
 
-**What replaces nginx.**
+## Headers and other rules
 
-| nginx | Workers |
+| Need | Where |
 |---|---|
-| `try_files $uri $uri/index.html` | `html_handling: auto-trailing-slash`: `/blog/x` answers `307` to `/blog/x/` (nginx served `200` at both) |
-| `error_page 404 /blog/404.html` | `not_found_handling: 404-page`: the nearest `404.html`, status 404 |
-| security headers | `_headers`, rule `/blog/*` (blog) and `/*` (home) |
-| HTML `max-age=0, must-revalidate` | the Workers default, no rule needed |
-| `_astro/` 1 year immutable, images and fonts 30 days, `robots.txt`, `llms.txt`, `rss.xml` 1 hour | `_headers` |
-| content types of `llms.txt`, `rss.xml` | `_headers` (Workers would send `text/plain` without a charset and `application/xml`) |
-| `/blog`, `/ivapopova`, `/ivapopova/projects`, `/ivapopova/cv` 301 | `deploy/placeholder/_redirects` on `sciscend-home`: these paths fall outside the `.../blog/*` and `.../ivapopova/*` routes |
-| `www` -> apex, gzip, TLS | Cloudflare zone (phase 3), automatic |
+| `/blog/x` -> `/blog/x/` | `html_handling: auto-trailing-slash` (307) |
+| 404 page | `not_found_handling: 404-page`: the nearest `404.html`, status 404 |
+| security headers, cache times, content types, HTML charset | `public/_headers` (blog), `deploy/placeholder/_headers` (home) |
+| `www` -> apex, HTTP -> HTTPS, TLS, compression | Cloudflare zone settings (workspace: `operations/hosting-and-deployment.md`) |
 
 Things that are easy to get wrong in `_headers`:
 
@@ -85,54 +82,23 @@ Things that are easy to get wrong in `_headers`:
   an image rule, so the `_astro` rule starts with `! Cache-Control` to drop the
   other one.
 - `_headers` cannot match by status: a 404 under `_astro/` or for a missing image
-  gets the long `Cache-Control` too (nginx sent it only with 2xx and 3xx).
+  gets the long `Cache-Control` too.
+- Limit: 100 rules.
 
-**Why the blog is staged in `dist-cf/`.** The plan was `"directory": "./dist"`
-with `"base_path": "/blog"`. On 2026-11-03 Cloudflare refused it: `A non-root
-assets.base_path is not enabled for this account. [code: 100343]`. So
-`deploy/deploy-cf.sh` copies `dist/` to `dist-cf/blog/` and moves `_headers` to
-`dist-cf/`, and the asset paths carry `/blog` themselves. If `base_path` is
-enabled for the account later, set `directory: ./dist` and `base_path: /blog`
-and drop the staging step; `_headers` stays the same. `dist-cf/` is gitignored.
+## Why the blog is staged in `dist-cf/`
 
-**Check after a deploy** (headers and content types):
+The plan was `"directory": "./dist"` with `"base_path": "/blog"`. On 2026-11-03
+Cloudflare refused it: `A non-root assets.base_path is not enabled for this
+account. [code: 100343]`. So `deploy/deploy.sh` copies `dist/` to
+`dist-cf/blog/` and moves `_headers` (and `_redirects`) to `dist-cf/`; the asset
+paths carry `/blog` themselves. If `base_path` is enabled for the account later,
+set `directory: ./dist` and `base_path: /blog` and drop the staging step;
+`_headers` stays the same. `dist-cf/` is gitignored.
 
-```bash
-B=https://sciscend-blog.sciscend.workers.dev
-for p in /blog/ /blog/tag/ai-agents/ /blog/rss.xml /blog/sitemap-index.xml /blog/llms.txt /blog/no-such-page/; do
-  echo "== $p"; curl -sI "$B$p" | grep -iE '^(HTTP|content-type|cache-control|location|x-frame-options)'
-done
-```
+## Rollback
 
-**Phase 3 (switch the live domain)** is adding `routes` to the two configs
-(`sciscend.com/blog/*` for the blog, `sciscend.com/*` for home, home last) plus
-the `www` Redirect Rule in the zone. See the plan in the workspace.
-
-## Changing nginx
-
-`nginx-sciscend.conf` in this folder is the source of truth for the live site
-config (moved here from `sciscend-web` on 2026-09-22). Edit it here, then:
-
-```bash
-scp deploy/nginx-sciscend.conf bulinfo:/tmp/sciscend.conf
-ssh bulinfo 'sudo cp /etc/nginx/sites-available/sciscend.com /etc/nginx/sites-available/sciscend.com.bak-$(date +%F) \
-  && sudo cp /tmp/sciscend.conf /etc/nginx/sites-available/sciscend.com \
-  && sudo nginx -t && sudo systemctl reload nginx'
-```
-
-`nginx -t` before the reload means a bad config never takes the site down; if it
-fails, copy the backup back.
-
-## Server facts
-
-| Thing | Value |
-|---|---|
-| SSH | `bulinfo` alias in `~/.ssh/config` |
-| Web roots | `/var/www/sciscend.com/html` (placeholder), `/var/www/sciscend.com/blog` (blog), owned by `ubuntu` — no sudo for deploys |
-| nginx site | `/etc/nginx/sites-available/sciscend.com` |
-| TLS | Let's Encrypt, cert `sciscend.com` (apex + `www`), certbot systemd timer |
-| DNS | Cloudflare, proxied |
-| Firewall | ufw: SSH open (keys only); 80/443 only from Cloudflare's IP ranges. Runbook in the workspace's `operations/hosting-and-deployment.md` |
-
-Rebuilding the server from scratch is documented in the workspace:
-`operations/hosting-and-deployment.md`.
+Until the Bullinfo VPS expires (2026-11-12), the old nginx site still holds the
+2026-11-03 content: removing the routes (dashboard -> Workers & Pages -> Worker
+-> Settings -> Domains & Routes) sends the requests back to it. After that date,
+roll back by deploying an older commit. The former rsync scripts and nginx config
+are in git history (removed in the commit "Deploy to Cloudflare Workers only").

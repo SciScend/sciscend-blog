@@ -53,8 +53,8 @@ posts live.
    - shorten only a slug that breaks these limits; do not reword one that fits.
 
    A slug can change freely until the post is published. After that it is a
-   permanent URL, and changing it needs an nginx 301 in
-   `deploy/nginx-sciscend.conf`.
+   permanent URL, and changing it needs a 301 in `public/_redirects`
+   (see `deploy/README.md`).
 4. **Tags.** Run `npm run tags` and **reuse** existing tags. Add a new tag only
    when the topic is genuinely new, and never a near-duplicate (`llm` exists →
    not `llms`, not `language-models`). Lowercase kebab-case, English, 2–5 per

@@ -1,5 +1,5 @@
 # Response headers for the sciscend-home Worker (the placeholder at /).
-# Carries over the server-level part of deploy/nginx-sciscend.conf. Every matching
+# Carries over the server-level part of the former nginx config (git history). Every matching
 # rule adds its headers; the same header from two rules is joined with a comma.
 # Only an image or font under _astro/ matches two Cache-Control rules; the _astro
 # rule drops the other one with "! Cache-Control" (tested on workers.dev).

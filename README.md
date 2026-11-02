@@ -3,7 +3,7 @@
 Source of **https://sciscend.com/blog/** — practical AI, Python and machine learning
 in Bulgarian: tests of new models, beginner guides, AI for small business.
 
-Static [Astro](https://astro.build/) site, served by nginx under `/blog/`. The
+Static [Astro](https://astro.build/) site, served by a Cloudflare Worker under `/blog/`. The
 homepage `/` is a separate coming-soon placeholder, versioned in
 `deploy/placeholder/`.
 
@@ -12,7 +12,7 @@ npm install
 npm run dev          # http://localhost:4321/blog/ — drafts visible here only
 npm run tags         # tags in use, to reuse when tagging a new post
 npm run build        # validates every post's frontmatter
-npm run deploy       # build + rsync to the VPS (see deploy/README.md)
+npm run deploy       # build + wrangler deploy to Cloudflare (see deploy/README.md)
 ```
 
 A post is a Markdown file in `src/content/blog/`; its path is its URL. New posts
@@ -35,7 +35,7 @@ The LinkedIn announcement follows with `/linkedin-post from-blog <path>` in the
 SciScend workspace.
 
 - [docs/tech-spec.md](docs/tech-spec.md) — how it is built, served and published
-- [deploy/README.md](deploy/README.md) — deploy and nginx runbook
+- [deploy/README.md](deploy/README.md) — deploy runbook (Cloudflare Workers)
 
 ## License
 

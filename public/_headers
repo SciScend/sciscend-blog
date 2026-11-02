@@ -1,5 +1,5 @@
 # Response headers for the sciscend-blog Worker (Cloudflare Workers static assets).
-# Carries over the /blog/ part of deploy/nginx-sciscend.conf. Paths are the public
+# Carries over the /blog/ part of the former nginx config (git history). Paths are the public
 # ones, with /blog in front. Every matching rule adds its headers;
 # the same header from two rules is joined with a comma. Only an image or font
 # under _astro/ matches two Cache-Control rules; the _astro rule drops the other

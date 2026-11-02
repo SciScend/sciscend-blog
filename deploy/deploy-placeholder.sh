@@ -1,22 +1,18 @@
 #!/usr/bin/env bash
 #
-# Deploy the coming-soon placeholder to https://sciscend.com/ (the web root).
-# Mirrors deploy/placeholder/ into the html/ folder; the blog lives next to it
-# in blog/ and is not touched.
+# Deploy the coming-soon placeholder (deploy/placeholder/) to the Cloudflare
+# Worker `sciscend-home` (wrangler.home.jsonc). Nothing to build. Live on the
+# route sciscend.com/* (every path without a more specific route).
+#
+#   npm run deploy:placeholder
+#
+# Credentials: as in deploy/deploy.sh.
 #
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
+source deploy/cloudflare-env.sh
 
-[[ -f deploy/deploy.env ]] && source deploy/deploy.env
-: "${DEPLOY_SSH:?Set DEPLOY_SSH in deploy/deploy.env}"
-: "${PLACEHOLDER_PATH:?Set PLACEHOLDER_PATH in deploy/deploy.env}"
-DEPLOY_PORT="${DEPLOY_PORT:-22}"
-
-[[ "$PLACEHOLDER_PATH" == */html ]] || { echo "✗ PLACEHOLDER_PATH must end in /html (got $PLACEHOLDER_PATH)"; exit 1; }
-
-echo "▶ Deploying deploy/placeholder/ → ${DEPLOY_SSH}:${PLACEHOLDER_PATH}/"
-rsync -avz --delete -e "ssh -p ${DEPLOY_PORT}" --exclude '.DS_Store' --exclude '_headers' --exclude '_redirects' deploy/placeholder/ "${DEPLOY_SSH}:${PLACEHOLDER_PATH}/"
-
-echo "✓ Deployed: https://sciscend.com/"
+echo "▶ Deploying deploy/placeholder/ → Worker sciscend-home"
+npx wrangler deploy --config wrangler.home.jsonc

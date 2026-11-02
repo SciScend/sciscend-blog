@@ -1,30 +1,32 @@
 #!/usr/bin/env bash
 #
-# Deploy the blog to https://sciscend.com/blog/.
-# Builds locally (the 1 GB VPS never builds), then mirrors dist/ into the blog
-# web root. Only that folder is touched — the placeholder at / is separate.
+# Deploy the blog to the Cloudflare Worker `sciscend-blog` (wrangler.jsonc).
+# Builds locally, stages dist/ as dist-cf/blog/, then uploads it with
+# `wrangler deploy`. Live on the route sciscend.com/blog/*.
 #
-#   cp deploy/deploy.env.example deploy/deploy.env   # once
 #   npm run deploy
+#
+# Credentials: CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN, from the
+# environment or from CLOUDFLARE_ENV_FILE (default: the SciScend workspace's
+# .private/cloudflare.env). They are never printed.
 #
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
-
-[[ -f deploy/deploy.env ]] && source deploy/deploy.env
-: "${DEPLOY_SSH:?Set DEPLOY_SSH in deploy/deploy.env}"
-: "${DEPLOY_PATH:?Set DEPLOY_PATH in deploy/deploy.env}"
-DEPLOY_PORT="${DEPLOY_PORT:-22}"
-
-# Guard against a typo that would mirror the blog over the placeholder.
-[[ "$DEPLOY_PATH" == */blog ]] || { echo "✗ DEPLOY_PATH must end in /blog (got $DEPLOY_PATH)"; exit 1; }
+source deploy/cloudflare-env.sh
 
 echo "▶ Building…"
 npm run build
 
-echo "▶ Deploying dist/ → ${DEPLOY_SSH}:${DEPLOY_PATH}/"
-ssh -p "$DEPLOY_PORT" "$DEPLOY_SSH" "mkdir -p '$DEPLOY_PATH'"
-rsync -avz --delete -e "ssh -p ${DEPLOY_PORT}" --exclude '.DS_Store' --exclude '_headers' --exclude '_redirects' dist/ "${DEPLOY_SSH}:${DEPLOY_PATH}/"
+# Stage dist/ under /blog (see the comment in wrangler.jsonc on base_path).
+echo "▶ Staging dist/ → dist-cf/blog/"
+rm -rf dist-cf
+mkdir -p dist-cf/blog
+cp -R dist/. dist-cf/blog/
+mv dist-cf/blog/_headers dist-cf/_headers
+# A public/_redirects (old slug -> new slug) must sit at the assets root too.
+if [[ -f dist-cf/blog/_redirects ]]; then mv dist-cf/blog/_redirects dist-cf/_redirects; fi
 
-echo "✓ Deployed: https://sciscend.com/blog/"
+echo "▶ Deploying dist-cf/ → Worker sciscend-blog"
+npx wrangler deploy --config wrangler.jsonc

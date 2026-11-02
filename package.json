@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Блогът на SciScend — sciscend.com/blog. Static Astro site, served by nginx.",
+  "description": "Блогът на SciScend — sciscend.com/blog. Static Astro site on a Cloudflare Worker (static assets).",
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/check-news.mjs && astro build",
@@ -12,9 +12,7 @@
     "tags": "node scripts/tags.mjs",
     "check:news": "node scripts/check-news.mjs",
     "deploy": "bash deploy/deploy.sh",
-    "deploy:placeholder": "bash deploy/deploy-placeholder.sh",
-    "deploy:cf": "bash deploy/deploy-cf.sh",
-    "deploy:cf:placeholder": "bash deploy/deploy-cf-placeholder.sh"
+    "deploy:placeholder": "bash deploy/deploy-placeholder.sh"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.8",

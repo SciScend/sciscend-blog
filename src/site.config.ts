@@ -10,7 +10,7 @@
 export const SITE = {
   /** Production origin — no trailing slash. */
   origin: 'https://sciscend.com',
-  /** Path the blog is served under. Must match nginx `location ^~ /blog/`. */
+  /** Path the blog is served under. Must match the Worker route sciscend.com/blog/* and dist-cf/blog/. */
   base: '/blog',
 
   name: 'SciScend',
