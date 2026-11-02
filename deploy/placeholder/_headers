@@ -11,6 +11,16 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
 
+# HTML pages (see public/_headers).
+/
+  Content-Type: text/html; charset=utf-8
+/*/
+  Content-Type: text/html; charset=utf-8
+
+# The workers.dev copy stays out of search results.
+https://:worker.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
+
 # Hashed build assets (for the launch site that replaces the placeholder): 1 year.
 /_astro/*
   ! Cache-Control

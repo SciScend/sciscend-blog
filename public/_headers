@@ -12,6 +12,17 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
 
+# HTML pages: Workers sends text/html without a charset. Page URLs end in a
+# slash (auto-trailing-slash), files never do, so this hits only HTML.
+/blog/
+  Content-Type: text/html; charset=utf-8
+/blog/*/
+  Content-Type: text/html; charset=utf-8
+
+# The workers.dev copy stays out of search results.
+https://:worker.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
+
 # Hashed build assets: 1 year, immutable.
 /blog/_astro/*
   ! Cache-Control

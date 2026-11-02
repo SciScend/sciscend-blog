@@ -9,6 +9,9 @@
   "name": "sciscend-home",
   "compatibility_date": "2026-11-01",
   "workers_dev": true,
+  // No Version or Preview URLs: deploys go straight from the laptop, and each
+  // would be one more public copy of the site (sciscend operations/cloudflare-workers-review.md).
+  "preview_urls": false,
   "assets": {
     "directory": "./deploy/placeholder",
     "html_handling": "auto-trailing-slash",
