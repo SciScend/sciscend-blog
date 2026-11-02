@@ -17,6 +17,6 @@ DEPLOY_PORT="${DEPLOY_PORT:-22}"
 [[ "$PLACEHOLDER_PATH" == */html ]] || { echo "✗ PLACEHOLDER_PATH must end in /html (got $PLACEHOLDER_PATH)"; exit 1; }
 
 echo "▶ Deploying deploy/placeholder/ → ${DEPLOY_SSH}:${PLACEHOLDER_PATH}/"
-rsync -avz --delete -e "ssh -p ${DEPLOY_PORT}" --exclude '.DS_Store' deploy/placeholder/ "${DEPLOY_SSH}:${PLACEHOLDER_PATH}/"
+rsync -avz --delete -e "ssh -p ${DEPLOY_PORT}" --exclude '.DS_Store' --exclude '_headers' --exclude '_redirects' deploy/placeholder/ "${DEPLOY_SSH}:${PLACEHOLDER_PATH}/"
 
 echo "✓ Deployed: https://sciscend.com/"

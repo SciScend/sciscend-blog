@@ -25,6 +25,6 @@ npm run build
 
 echo "▶ Deploying dist/ → ${DEPLOY_SSH}:${DEPLOY_PATH}/"
 ssh -p "$DEPLOY_PORT" "$DEPLOY_SSH" "mkdir -p '$DEPLOY_PATH'"
-rsync -avz --delete -e "ssh -p ${DEPLOY_PORT}" --exclude '.DS_Store' dist/ "${DEPLOY_SSH}:${DEPLOY_PATH}/"
+rsync -avz --delete -e "ssh -p ${DEPLOY_PORT}" --exclude '.DS_Store' --exclude '_headers' --exclude '_redirects' dist/ "${DEPLOY_SSH}:${DEPLOY_PATH}/"
 
 echo "✓ Deployed: https://sciscend.com/blog/"

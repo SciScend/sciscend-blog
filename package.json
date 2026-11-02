@@ -12,7 +12,9 @@
     "tags": "node scripts/tags.mjs",
     "check:news": "node scripts/check-news.mjs",
     "deploy": "bash deploy/deploy.sh",
-    "deploy:placeholder": "bash deploy/deploy-placeholder.sh"
+    "deploy:placeholder": "bash deploy/deploy-placeholder.sh",
+    "deploy:cf": "bash deploy/deploy-cf.sh",
+    "deploy:cf:placeholder": "bash deploy/deploy-cf-placeholder.sh"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.8",

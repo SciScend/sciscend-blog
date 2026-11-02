@@ -1,0 +1,17 @@
+// Cloudflare Worker for the coming-soon placeholder at https://sciscend.com/.
+// Static assets only, no Worker code. Deploy: `npm run deploy:cf:placeholder`.
+// Kept in the repo root (not in deploy/placeholder/) so the config itself is never
+// uploaded or rsynced as a public file.
+// No `routes` yet: phase 2 runs on workers.dev only. The route `sciscend.com/*`
+// is added in phase 3, last, because it catches every path without its own Worker.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sciscend-home",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./deploy/placeholder",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
