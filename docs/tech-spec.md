@@ -80,6 +80,7 @@ sciscend-blog/
 │       ├── tag/[tag].astro     /blog/tag/<tag>/
 │       ├── rss.xml.ts          /blog/rss.xml
 │       ├── llms.txt.ts         /blog/llms.txt
+│       ├── poveritelnost.astro /blog/poveritelnost/  privacy notice for the analytics (BG + EN; linked in the footer and the placeholder)
 │       └── 404.astro           /blog/404.html
 ├── public/                     logo, favicons, default share image, post images, _headers (Cloudflare)
 ├── scripts/tags.mjs            `npm run tags` — tags in use with counts

@@ -1,0 +1,66 @@
+---
+// /blog/poveritelnost/ - the privacy notice for the cookieless analytics of
+// sciscend.com (sciscend-analytics). The source of truth for what is collected
+// is /data/projects/sciscend-analytics/docs/privacy.md: change both together.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site.config.ts';
+---
+
+<BaseLayout title="Поверителност" description="Какво записва статистиката на sciscend.com: без бисквитки, без IP адреси.">
+  <header class="page-head">
+    <h1>Поверителност</h1>
+    <p>Последна промяна: 3 ноември 2026 г. · <a href="#english" lang="en">English</a></p>
+  </header>
+
+  <div class="prose">
+    <p>Сайтът sciscend.com не използва бисквитки (cookies) и не записва нищо в браузъра ви.</p>
+
+    <p>
+      За да знаем кои статии се четат и как читателите стигат до тях, водим анонимна статистика на
+      посещенията със собствен инструмент в Cloudflare. При зареждане на страница се записват:
+      адресът на страницата, сайтът, от който идвате, UTM етикетите на линка, браузърът,
+      операционната система и типът устройство, широчината на екрана, езикът на браузъра, държавата,
+      областта и градът според IP адреса и мрежата (доставчикът), колко време страницата е била
+      активна, докъде сте превъртели, скоростта на зареждане, както и кликове към други сайтове и към
+      имейл адреси, изтегляния, копиран код и грешки в JavaScript.
+    </p>
+
+    <p>
+      IP адресът ви не се записва. За да се броят посетителите, от него и от браузъра се изчислява
+      идентификатор със случаен ключ, който се изтрива всеки ден: след края на деня идентификаторът не
+      може да бъде свързан с вас, а в друг ден сте нов, непознат посетител.
+    </p>
+
+    <p>
+      Данните се използват само за статистика на този сайт, не се предоставят на други и се пазят до
+      2 години. Основание: законен интерес (чл. 6, пар. 1, буква "е" от GDPR). Въпроси:
+      <a href={`mailto:${SITE.contact}`}>{SITE.contact}</a>.
+    </p>
+
+    <h2 id="english" lang="en">Privacy</h2>
+    <div lang="en">
+      <p>sciscend.com uses no cookies and stores nothing in your browser.</p>
+
+      <p>
+        To learn which articles are read and how readers find them, we keep anonymous visit statistics
+        with our own tool on Cloudflare. When a page loads we record: the page address, the site you
+        came from, the link's UTM tags, your browser, operating system and device type, screen width,
+        browser language, the country, region and city of your IP address and its network (provider),
+        how long the page was active, how far you scrolled, page speed, and clicks to other sites and
+        email addresses, downloads, copied code and JavaScript errors.
+      </p>
+
+      <p>
+        Your IP address is not stored. To count visitors, an identifier is computed from it and your
+        browser with a random key that is deleted every day: after the day ends the identifier cannot be
+        linked to you, and on another day you are a new, unknown visitor.
+      </p>
+
+      <p>
+        The data is used only for this site's statistics, is not shared, and is kept for up to 2 years.
+        Legal basis: legitimate interest (GDPR Art. 6(1)(f)). Questions:
+        <a href={`mailto:${SITE.contact}`}>{SITE.contact}</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
