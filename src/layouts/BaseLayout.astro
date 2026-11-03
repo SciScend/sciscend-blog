@@ -13,6 +13,8 @@ interface Props {
   tags?: string[];
   jsonLd?: Record<string, unknown>;
   noindex?: boolean;
+  /** HTTP status the page stands for (404.astro passes 404); the analytics tracker reports it. */
+  status?: number;
 }
 
 const {
@@ -25,6 +27,7 @@ const {
   tags = [],
   jsonLd,
   noindex = false,
+  status,
 } = Astro.props;
 
 const fullTitle = title ? `${title} · ${SITE.title}` : SITE.title;
@@ -64,6 +67,10 @@ const path = Astro.url.pathname;
     <meta name="twitter:card" content="summary_large_image" />
 
     {jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
+
+    {/* Cookieless analytics (sciscend-analytics): served by its own Worker on /_a/*. */}
+    {status === 404 && <meta name="sa-status" content="404" />}
+    <script is:inline defer src="/_a/s.js"></script>
   </head>
   <body>
     <header class="site-header">

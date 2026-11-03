@@ -17,7 +17,8 @@ Why it exists in this form is recorded in the SciScend workspace,
 | In scope | Out of scope (for now) |
 |---|---|
 | Article list, article pages, tag (category) pages | The company website — `sciscend-web` is on hold and will be redone |
-| RSS, sitemap, `llms.txt`, JSON-LD, Open Graph | Comments, newsletter, search, analytics |
+| RSS, sitemap, `llms.txt`, JSON-LD, Open Graph | Comments, newsletter, search |
+| Cookieless analytics: one `<script defer src="/_a/s.js">` in `BaseLayout.astro` and the placeholder; the collector is its own Worker on `/_a/*` (repo `sciscend-analytics`) | |
 | Posts in Bulgarian or English at `/blog/<slug>/`; R&D texts under `/blog/research/` | `hreflang` pairs (added with the first translated post) |
 | The coming-soon placeholder at `/` and the Cloudflare Worker configs | |
 | The "Building SciScend with AI" series under `/blog/building-sciscend/` (drafts; moved from the workspace 2026-10-09) | |

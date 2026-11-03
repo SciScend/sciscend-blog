@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { url } from '../site.config.ts';
 ---
 
-<BaseLayout title="Страницата не е намерена" noindex>
+<BaseLayout title="Страницата не е намерена" noindex status={404}>
   <header class="page-head">
     <h1>Няма такава страница</h1>
     <p>Може би статията е преместена. <a href={url()}>Към всички статии →</a></p>
